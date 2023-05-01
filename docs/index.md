@@ -8,11 +8,8 @@ hero:
   tagline: "Open source tools for Sociocracy 3.0"
   actions:
     - theme: brand
-      text: Get the code
-      link: https://github.com/OpenSociocracy/open-sociocracy-saas
-    - theme: alt
-      text: User Manual
-      link: /user-manual
+      text: Help guide the effort
+      link: https://handbook.opensociocracy.org/
 
 features:
   - title: Open Source
