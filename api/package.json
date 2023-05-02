@@ -2,7 +2,7 @@
   "name": "OpenSociocracy API",
   "version": "0.2.0",
   "scripts": {
-    "dev": "tsx watch src",
+    "dev": "DEBUG=com.supertokens tsx watch src",
     "build": "rm -rf build && tsx esbuild.ts",
     "start": "npm run build && node build",
     "format": "prettier --write src",

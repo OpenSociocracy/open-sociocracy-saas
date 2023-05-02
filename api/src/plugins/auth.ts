@@ -70,7 +70,7 @@ async function auth(server: any, options: any) {
       }),
       Session.init(), // initializes session features
       Dashboard.init({
-        apiKey: server.config.ULTRI_SUPERTOKENS_DASHBOARD_API_KEY,
+        apiKey: server.config.OPENSOCIOCRACY_SUPERTOKENS_DASHBOARD_API_KEY,
       }),
     ],
   });
