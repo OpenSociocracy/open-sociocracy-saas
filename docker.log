@@ -29,7 +29,7 @@ opensociocracy-pg           | creating configuration files ... ok
 opensociocracy-pg           | running bootstrap script ... ok
 opensociocracy-smtp4dev     | Using Sqlite database at /smtp4dev/database.db
 opensociocracy-api          | 
-opensociocracy-api          | > OpenSociocracy API@0.2.0 dev
+opensociocracy-api          | > Open Sociocray API@0.2.0 dev
 opensociocracy-api          | > tsx watch src
 opensociocracy-api          | 
 opensociocracy-pg           | performing post-bootstrap initialization ... ok

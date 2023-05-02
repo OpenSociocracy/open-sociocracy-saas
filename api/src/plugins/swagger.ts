@@ -6,7 +6,7 @@ export default fp(async (fastify) => {
   fastify.register(swagger, {
     openapi: {
       info: {
-        title: 'OpenSociocracy',
+        title: 'Open Sociocray',
         description: 'Store and relate your publishing data as nuggets',
         version: '0.1.0'
       },

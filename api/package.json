@@ -1,5 +1,5 @@
 {
-  "name": "OpenSociocracy API",
+  "name": "Open Sociocray API",
   "version": "0.2.0",
   "scripts": {
     "dev": "DEBUG=com.supertokens tsx watch src",
