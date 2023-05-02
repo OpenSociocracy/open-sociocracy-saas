@@ -2,6 +2,7 @@ services:
   postgres:
     container_name: opensociocracy-pg
     hostname: "postgres"
+    command: ["postgres", "-c", "log_statement=all"]
     image: "postgres:14"
     healthcheck:
       test: ["CMD", "pg_isready", "-q", "-d", "postgres", "-U", "postgres"]
@@ -10,7 +11,7 @@ services:
       retries: 10
     ports:
       - "5432:5432"
-    restart: always
+    restart: unless-stopped
     env_file: .env
     networks:
       - opensociocracy-net
@@ -40,7 +41,7 @@ services:
   redis:
     image: redis:7.0.7
     container_name: opensociocracy-redis
-    restart: always
+    restart: unless-stopped
     ports:
       - "6379:6379"
     networks:
@@ -51,7 +52,7 @@ services:
       - opensociocracy-redis:/data
 
   supertokens:
-    image: registry.supertokens.io/supertokens/supertokens-postgresql:4.3
+    image: registry.supertokens.io/supertokens/supertokens-postgresql:4.6
     depends_on:
       postgres:
         condition: service_healthy
@@ -74,7 +75,7 @@ services:
   smtp4dev:
     container_name: opensociocracy-smtp4dev
     image: rnwood/smtp4dev:v3
-    restart: always
+    restart: unless-stopped
     env_file: .env
     networks:
       - opensociocracy-net
