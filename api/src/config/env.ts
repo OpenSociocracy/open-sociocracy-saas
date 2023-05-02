@@ -19,7 +19,9 @@ async function configPlugin(fastify: any, options: any, done: any) {
       "SUPERTOKENS_3RD_PARTY_GITHUB_CLIENT_ID",
       "SUPERTOKENS_3RD_PARTY_GITHUB_CLIENT_SECRET",
       "CORS_ORIGIN_URL",
-      "POSTGRES_URI"
+      "API_POSTGRES_URI",
+      "API_USER",
+      "API_PASS"
     ],
     properties: {
       HTTP_PORT: {
@@ -87,7 +89,13 @@ async function configPlugin(fastify: any, options: any, done: any) {
       SMTP_SECURE: {
         type: "boolean",
       },
-      POSTGRES_URI: {
+      API_POSTGRES_URI: {
+        type: "string",
+      },
+      API_USER: {
+        type: "string",
+      },
+      API_PASS: {
         type: "string",
       },
     },

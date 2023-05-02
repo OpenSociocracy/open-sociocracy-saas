@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
-export PGPASSWORD=$SUPERTOKENS_PASS;
-psql -v ON_ERROR_STOP=1 --username "$SUPERTOKENS_USER" --dbname "$DB_NAME" <<-EOSQL
+export PGPASSWORD=$POSTGRES_PASSWORD;
+psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER"  --dbname "$DB_NAME" <<-EOSQL
   BEGIN;
     CREATE TABLE IF NOT EXISTS key_value (
         name VARCHAR(128),
