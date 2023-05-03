@@ -2,7 +2,7 @@
   "name": "opensociocracyapp",
   "version": "0.0.1",
   "description": "Open source tools for Sociocracy 3.0",
-  "productName": "Open Sociocracy",
+  "productName": "OpenSociocracy",
   "author": "Brian Winkers <bwinkers@gmail.com>",
   "private": true,
   "scripts": {

@@ -3,9 +3,9 @@
 layout: home
 
 hero:
-  name: "Open Sociocracy"
-  text: "Better decisions through better tools"
-  tagline: "Open source tools for Sociocracy 3.0"
+  name: "OpenSociocracy"
+  text: "Build in public has started"
+  tagline: "Using S3 practices to build S3 tools"
   actions:
     - theme: brand
       text: Help guide the effort
@@ -13,10 +13,10 @@ hero:
 
 features:
   - title: Open Source
-    details: All the code for Open Sociocray is free and open source.
-  - title: Self-hosted
-    details: You can host the software yourself, we include instructions on using various cloud providers.
-  - title: Hosted Option
-    details: Open Sociocray along with our sponsors offer a hosted Saas solution.
+    details: All the code for Open Sociocray is free and open source.<br /><br /><a href="/why-use-open-source/">Why Open Source?</a>
+  - title: Build in Public
+    details: We're starting a build in public effort, <a href="https://handbook.opensociocracy.org">help us define it</a>.<br /><br /><a href="/why-build-in-public/">Why Build in Public?</a>
+  - title: How to Contribute
+    details: We need experts to inform the correct path, and end users to define how they want to get there.<br /><br /><a href="/contributing/">Lend a hand</a>
 ---
 

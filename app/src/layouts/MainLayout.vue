@@ -6,7 +6,7 @@
           <!--<q-avatar>
             <img src="https://cdn.quasar.dev/logo-v2/svg/logo-mono-white.svg">
           </q-avatar>-->
-          <span><router-link :to="{ name: 'home'}" class="navbar-link">Open Sociocracy</router-link></span>
+          <span><router-link :to="{ name: 'home'}" class="navbar-link">OpenSociocracy</router-link></span>
         </q-toolbar-title>
         <div>
           <!-- DISPLAY EMAIL IF LOGGED IN -->
