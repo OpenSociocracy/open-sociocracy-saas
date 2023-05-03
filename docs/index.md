@@ -17,6 +17,6 @@ features:
   - title: Build in Public
     details: We're starting a build in public effort, <a href="https://handbook.opensociocracy.org">help us define it</a>.<br /><br /><a href="/why-build-in-public/">Why Build in Public?</a>
   - title: How to Contribute
-    details: We need experts to inform the correct path, and end users to define how they want to get there.<br /><br /><a href="/contributing/">Lend a hand</a>
+    details: We need experts to inform the correct path, and end users to define how they want to get there.<br /><br /><a href="https://handbook.opensociocracy.org/contributing/">Lend a hand</a>
 ---
 
