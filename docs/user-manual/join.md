@@ -1,1 +1,0 @@
-# Joining an Open Sociocray Server

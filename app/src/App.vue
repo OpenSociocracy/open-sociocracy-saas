@@ -38,7 +38,7 @@ SuperTokens.init({
   appInfo: {
     apiDomain: 'http://localhost:3005',
     apiBasePath: '/auth',
-    appName: 'Open Sociocracy',
+    appName: 'OpenSociocracy',
   },
   recipeList: [Session.init(), Passwordless.init()],
 });

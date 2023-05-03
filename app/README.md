@@ -1,4 +1,4 @@
-# Open Sociocracy (opensociocracyapp)
+# OpenSociocracy (opensociocracyapp)
 
 Open source tools for Sociocracy 3.0
 
