@@ -2,7 +2,7 @@ import { defineConfig } from 'vitepress'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
-  title: "OpenSociocracy",
+  title: "OpenSociocracy / S3+",
   description: "Open Source Sociocracy 3.0 Tools",
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
@@ -13,7 +13,10 @@ export default defineConfig({
 
     socialLinks: [
       { icon: 'github', link: 'https://github.com/orgs/Open Sociocray' },
-      { icon: 'discord', link: 'https://discord.com/channels/1103176560699260938/1103176560699260941'}
+      { icon: 'discord', link: 'https://discord.gg/seExDy6M'},
+      { icon: 'twitter', link: 'https://twitter.com/OpenSociocracy'},
+      { icon: 'facebook', link: 'https://www.facebook.com/OpenSociocracy/'},
+      { icon: 'mastodon', link: 'https://fosstodon.org/@opensociocracy'}
     ]
   }
 })
