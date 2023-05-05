@@ -2,7 +2,7 @@ import { defineConfig } from 'vitepress'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
-  title: "OpenSociocracy / S3+",
+  title: "OpenSociocracy",
   description: "Open Source Sociocracy 3.0 Tools",
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
