@@ -8,7 +8,7 @@ export default defineConfig({
     // https://vitepress.dev/reference/default-theme-config
     nav: [
       { text: 'Home', link: '/' },
-      { text: 'Join in', link: 'https://handbook.opensociocracy.org/contributing' }
+      { text: 'Join in', link: 'https://handbook.opensociocracy.org/contributing/' }
     ],
 
     socialLinks: [
