@@ -2,6 +2,14 @@
 
 OpenSociocracy is an effort to create a permissively licensed set of S3 tools.
 
-## Long term goals
+## Tech Stack
 
-We hope to advance it far enough to offer a developer owned SaaS using the software.
+* Quasar / Vue3 / Typescript front end
+* Fastify API, in TypeScript
+* Postgres
+* Redis
+* SuperTokens
+* Local Docker stack
+* TypeScript CDK to deploy to AWS
+
+
