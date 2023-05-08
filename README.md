@@ -33,11 +33,12 @@ Install CDK CLI
 npm install -g aws-cdk
 ```
 
-Create code dir, you must init CDK in an empty directory
+Create code dir, you must init CDK in an empty directory and CDK use the directory name as the project name.
 
 ```
 mkdir aws
 cd aws
+mkdir opensociocracy
 ```
 
 Install CDK modules
