@@ -5,6 +5,7 @@
     "docs:preview": "vitepress preview docs"
   },
   "dependencies": {
+    "aws-cdk-lib": "^2.78.0",
     "vitepress": "^1.0.0-alpha.75"
   }
 }
