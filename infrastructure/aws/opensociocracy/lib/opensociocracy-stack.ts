@@ -1,14 +1,13 @@
 import { Construct } from "constructs";
 import {
   aws_ec2 as ec2,
-  aws_route53 as route53,
   aws_elasticache as elasticache,
-  aws_rds as rds
-} from 'aws-cdk-lib';
-import {readFileSync} from 'fs';
+  aws_rds as rds,
+} from "aws-cdk-lib";
+import { readFileSync } from "fs";
 import * as cdk from "aws-cdk-lib";
-import { Aspects, CfnOutput, Duration } from 'aws-cdk-lib';
-import { CfnDBCluster } from 'aws-cdk-lib/aws-rds';
+import { Aspects, CfnOutput, Duration } from "aws-cdk-lib";
+import { CfnDBCluster } from "aws-cdk-lib/aws-rds";
 
 const stackName = "OpenSociocracyStack";
 
@@ -20,7 +19,7 @@ export class OpensociocracyStack extends cdk.Stack {
 
     const vpc = new ec2.Vpc(this, `${stackName}Vpc`, {
       maxAzs: 2,
-      ipAddresses: ec2.IpAddresses.cidr('172.27.0.0/16'),
+      ipAddresses: ec2.IpAddresses.cidr("172.27.0.0/16"),
       natGateways: 0,
       subnetConfiguration: [
         {
@@ -33,15 +32,15 @@ export class OpensociocracyStack extends cdk.Stack {
         },
         {
           name: `${stackName}PrivateSubnet`,
-          subnetType: ec2.SubnetType.PRIVATE_WITH_EGRESS
+          subnetType: ec2.SubnetType.PRIVATE_WITH_EGRESS,
         },
       ],
     });
 
-    cdk.Tags.of(vpc).add('copilot-application', 'opensociocracy');
-    cdk.Tags.of(vpc).add('copilot-environment', 'production');
-    cdk.Tags.of(vpc).add('tenant', 'opensociocracy');
-    cdk.Tags.of(vpc).add('cost-center', 'webservices');
+    cdk.Tags.of(vpc).add("copilot-application", "opensociocracy");
+    cdk.Tags.of(vpc).add("copilot-environment", "production");
+    cdk.Tags.of(vpc).add("tenant", "opensociocracy");
+    cdk.Tags.of(vpc).add("cost-center", "webservices");
 
     const redisSubnetGroup = new elasticache.CfnSubnetGroup(
       this,
@@ -77,15 +76,17 @@ export class OpensociocracyStack extends cdk.Stack {
         preferredMaintenanceWindow: "fri:00:30-fri:01:30",
       }
     );
-    
+
     redisCache.addDependency(redisSubnetGroup);
 
-    cdk.Tags.of(redisCache).add('copilot-application', 'opensociocracy');
-    cdk.Tags.of(redisCache).add('copilot-environment', 'production');
-    cdk.Tags.of(redisCache).add('opensociocracy-tenant', 'opensociocracy');
-    cdk.Tags.of(redisCache).add('opensociocracy-cost-center', 'service-infrastructure');
-    
-    
+    cdk.Tags.of(redisCache).add("copilot-application", "opensociocracy");
+    cdk.Tags.of(redisCache).add("copilot-environment", "production");
+    cdk.Tags.of(redisCache).add("tenant", "opensociocracy");
+    cdk.Tags.of(redisCache).add(
+      "cost-center",
+      "webservices"
+    );
+
     new cdk.CfnOutput(this, `${stackName}CacheEndpointUrl`, {
       value: redisCache.attrRedisEndpointAddress,
     });
@@ -107,57 +108,60 @@ export class OpensociocracyStack extends cdk.Stack {
     );
 
     ec2SG.addIngressRule(
-      ec2.Peer.ipv4('174.87.2.136/32'),
+      ec2.Peer.ipv4("174.87.2.136/32"),
       ec2.Port.tcp(22),
-      'allow SSH connections from office',
+      "allow SSH connections from office"
     );
 
     ec2SG.addIngressRule(
       ec2.Peer.anyIpv4(),
       ec2.Port.tcp(80),
-      'allow HTTP connections from anywhere',
+      "allow HTTP connections from anywhere"
     );
 
     ec2SG.addIngressRule(
       ec2.Peer.anyIpv4(),
       ec2.Port.tcp(443),
-      'allow HTTPS connections from anywhere',
+      "allow HTTPS connections from anywhere"
     );
 
     const rootVolume: ec2.BlockDevice = {
-      deviceName: '/dev/sda1', 
+      deviceName: "/dev/sda1",
       volume: ec2.BlockDeviceVolume.ebs(40), // Override the volume size in Gibibytes (GiB)
     };
 
     // 👇 create the EC2 instance
-    const ec2Instance = new ec2.Instance(this, 'ec2-instance', {
+    const ec2Instance = new ec2.Instance(this, "ec2-instance", {
       vpc,
       vpcSubnets: {
         subnetType: ec2.SubnetType.PUBLIC,
       },
       securityGroup: ec2SG,
       instanceType: ec2.InstanceType.of(
-        ec2.InstanceClass.T3,  // One 't4g.small' per account free through end of 2023
+        ec2.InstanceClass.T3, // One 't4g.small' per account free through end of 2023
         ec2.InstanceSize.MEDIUM
       ),
       // Images from https://wiki.debian.org/Cloud/AmazonEC2Image/Bullseye
       machineImage: new ec2.GenericLinuxImage({
-        'us-east-1': 'ami-0fec2c2e2017f4e7b',
-        'us-west-1': 'ami-0bf166b48bbe2bf7c'
+        "us-east-1": "ami-0fec2c2e2017f4e7b",
+        "us-west-1": "ami-0bf166b48bbe2bf7c",
       }),
-      keyName: 'dell-laptop',
-      blockDevices: [rootVolume]
+      keyName: "opensociocracy-admin",
+      blockDevices: [rootVolume],
     });
 
     // 👇 load user data script
-    const userDataScript = readFileSync('./lib/user-data.sh', 'utf8');
+    const userDataScript = readFileSync("./lib/user-data.sh", "utf8");
 
     // 👇 add user data to the EC2 instance
     ec2Instance.addUserData(userDataScript);
 
-    cdk.Tags.of(ec2Instance).add('opensociocracy-tenant', 'opensociocracy');
-    cdk.Tags.of(ec2Instance).add('opensociocracy-cost-center', 'service-infrastructure');
-    cdk.Tags.of(ec2Instance).add('Name', 'Service-US-East-1-Compute-x86-1');
+    cdk.Tags.of(ec2Instance).add("tenant", "opensociocracy");
+    cdk.Tags.of(ec2Instance).add(
+      "cost-center",
+      "webservices"
+    );
+    cdk.Tags.of(ec2Instance).add("Name", "Service-US-East-1-Compute-x86-1");
 
     // Elastic IP
     let eip = new ec2.CfnEIP(this, "Ip");
@@ -165,50 +169,31 @@ export class OpensociocracyStack extends cdk.Stack {
     // EC2 Instance <> EIP
     let ec2Assoc = new ec2.CfnEIPAssociation(this, "Ec2Association", {
       eip: eip.ref,
-      instanceId: ec2Instance.instanceId
+      instanceId: ec2Instance.instanceId,
     });
 
-    const hostedZone = route53.HostedZone.fromLookup(this, "HostedZone", {
-      domainName: 'opensociocracy.com',
-    });
-
-    new route53.ARecord(this, 'ServiceARecord', {
-      zone: hostedZone,
-      target: route53.RecordTarget.fromIpAddresses(eip.ref),
-      recordName: 'service.opensociocracy.com'
-    });
-    new route53.ARecord(this, 'AuthARecord', {
-      zone: hostedZone,
-      target: route53.RecordTarget.fromIpAddresses(eip.ref),
-      recordName: 'auth.opensociocracy.com'
-    });
-    new route53.ARecord(this, 'SpecificHostARecord', {
-      zone: hostedZone,
-      target: route53.RecordTarget.fromIpAddresses(eip.ref),
-      recordName: 'host-0.service.opensociocracy.com'
-    });
-    
-
-    const postgresCluster = new rds.DatabaseCluster(this, 'db-cluster', {
+    const postgresCluster = new rds.DatabaseCluster(this, "db-cluster", {
       engine: rds.DatabaseClusterEngine.auroraPostgres({
         version: rds.AuroraPostgresEngineVersion.VER_14_5,
       }),
       instances: 1,
       instanceProps: {
         vpc: vpc,
-        instanceType: new ec2.InstanceType('serverless'),
+        instanceType: new ec2.InstanceType("serverless"),
         autoMinorVersionUpgrade: true,
         publiclyAccessible: false,
         deleteAutomatedBackups: true,
         vpcSubnets: vpc.selectSubnets({
-          subnetType: ec2.SubnetType.PRIVATE_ISOLATED, 
+          subnetType: ec2.SubnetType.PRIVATE_ISOLATED,
         }),
       },
-      credentials: rds.Credentials.fromGeneratedSecret('postgres', {secretName: 'opensociocracy/opensociocracy/production/postgres-cluster',}),
+      credentials: rds.Credentials.fromGeneratedSecret("postgres", {
+        secretName: "opensociocracy/opensociocracy/production/postgres-cluster",
+      }),
       port: 5432,
-      deletionProtection: false,      
-    })
-    
+      deletionProtection: false,
+    });
+
     // add capacity to the db cluster to enable scaling
     Aspects.of(postgresCluster).add({
       visit(node) {
@@ -216,26 +201,27 @@ export class OpensociocracyStack extends cdk.Stack {
           node.serverlessV2ScalingConfiguration = {
             minCapacity: 0.5, // min capacity is 0.5 vCPU
             maxCapacity: 1, // max capacity is 1 vCPU (default)
-          }
+          };
         }
       },
-    })
-    cdk.Tags.of(postgresCluster).add('copilot-application', 'opensociocracy');
-    cdk.Tags.of(postgresCluster).add('copilot-environment', 'production');
-    cdk.Tags.of(postgresCluster).add('opensociocracy-tenant', 'opensociocracy');
-    cdk.Tags.of(postgresCluster).add('opensociocracy-cost-center', 'service-infrastructure');
+    });
+    cdk.Tags.of(postgresCluster).add("copilot-application", "opensociocracy");
+    cdk.Tags.of(postgresCluster).add("copilot-environment", "production");
+    cdk.Tags.of(postgresCluster).add("tenant", "opensociocracy");
+    cdk.Tags.of(postgresCluster).add(
+      "cost-center",
+      "webservices"
+    );
 
     postgresCluster.connections.allowFrom(ec2SG, ec2.Port.tcp(5432));
 
-    new cdk.CfnOutput(this, 'postgresClusterEndpoint', {
+    new cdk.CfnOutput(this, "postgresClusterEndpoint", {
       value: postgresCluster.clusterEndpoint.hostname,
     });
 
-    new cdk.CfnOutput(this, 'postgresClusterSecretName', {
+    new cdk.CfnOutput(this, "postgresClusterSecretName", {
       // eslint-disable-next-line @typescript-eslint/no-non-null-asserted-optional-chain
       value: postgresCluster.secret?.secretName!,
     });
-  
-  }
   }
 }

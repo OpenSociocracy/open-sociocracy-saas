@@ -87,6 +87,28 @@ services:
       # This is where smtp4dev stores the database..
       - opensociocracy-smtp4dev:/smtp4dev
 
+  gateway:
+    image: ultri/open-platform-gateway:latest
+    container_name: opensociocracy-gateway
+    restart: on-failure
+    ports:
+      - "80:80"
+      - "443:443"
+    env_file: ".env"
+    networks:
+      - opensociocracy-net
+    volumes:
+      - "./gateway/config/nginx.conf:/usr/local/openresty/nginx/conf/nginx.conf"
+      - "./gateway/config/account.key:/etc/openresty/account.key"
+      - "./gateway/certs/default-service.key:/etc/openresty/default.key"
+      - "./gateway/certs/default-service.pem:/etc/openresty/default.pem"
+      - "./gateway/html:/usr/local/openresty/nginx/html"
+      - "./logs/gateway:/usr/local/openresty/nginx/logs"
+    depends_on:
+      - redis
+      - supertokens
+      - api
+
 volumes:
   opensociocracy-smtp4dev: {}
   opensociocracy-pg: {}
