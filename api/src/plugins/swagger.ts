@@ -6,13 +6,13 @@ export default fp(async (fastify) => {
   fastify.register(swagger, {
     openapi: {
       info: {
-        title: 'Open Sociocray',
-        description: 'Store and relate your publishing data as nuggets',
+        title: 'OpenSociocray',
+        description: 'Using Sociocracy to build Sociocracy tools',
         version: '0.1.0'
       },
       servers: [
         {
-          url: 'http://0.0.0.0:3005/',
+          url: 'https://api.opensociocracy.org/',
         }
       ]
     },
