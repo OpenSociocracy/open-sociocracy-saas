@@ -180,12 +180,7 @@ export class OpensociocracyStack extends cdk.Stack {
     new route53.ARecord(this, 'APIARecord', {
       zone: hostedZone,
       target: route53.RecordTarget.fromIpAddresses(eip.ref),
-      recordName: 'api.service.opensociocracy.org',
-    });
-    new route53.ARecord(this, 'AuthARecord', {
-      zone: hostedZone,
-      target: route53.RecordTarget.fromIpAddresses(eip.ref),
-      recordName: 'auth.service.opensociocracy.org',
+      recordName: 'bastion.service.opensociocracy.org',
     });
 
     const postgresCluster = new rds.DatabaseCluster(this, "db-cluster", {
