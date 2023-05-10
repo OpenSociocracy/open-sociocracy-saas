@@ -1,0 +1,14 @@
+{
+  "availability-zones:account=634272504630:region=us-east-1": [
+    "us-east-1a",
+    "us-east-1b",
+    "us-east-1c",
+    "us-east-1d",
+    "us-east-1e",
+    "us-east-1f"
+  ],
+  "hosted-zone:account=634272504630:domainName=service.opensociocracy.org:region=us-east-1": {
+    "Id": "/hostedzone/Z03885661UM6DLIOLNAXK",
+    "Name": "service.opensociocracy.org."
+  }
+}

@@ -2,6 +2,7 @@ import { Construct } from "constructs";
 import {
   aws_ec2 as ec2,
   aws_elasticache as elasticache,
+  aws_route53 as route53,
   aws_rds as rds,
 } from "aws-cdk-lib";
 import { readFileSync } from "fs";
@@ -170,6 +171,21 @@ export class OpensociocracyStack extends cdk.Stack {
     let ec2Assoc = new ec2.CfnEIPAssociation(this, "Ec2Association", {
       eip: eip.ref,
       instanceId: ec2Instance.instanceId,
+    });
+
+    const hostedZone = route53.HostedZone.fromLookup(this, "HostedZone", {
+      domainName: 'service.opensociocracy.org',
+    });
+
+    new route53.ARecord(this, 'APIARecord', {
+      zone: hostedZone,
+      target: route53.RecordTarget.fromIpAddresses(eip.ref),
+      recordName: 'api.service.opensociocracy.org',
+    });
+    new route53.ARecord(this, 'AuthARecord', {
+      zone: hostedZone,
+      target: route53.RecordTarget.fromIpAddresses(eip.ref),
+      recordName: 'auth.service.opensociocracy.org',
     });
 
     const postgresCluster = new rds.DatabaseCluster(this, "db-cluster", {
