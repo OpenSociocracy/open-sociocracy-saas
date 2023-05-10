@@ -4,6 +4,11 @@ import {
   aws_elasticache as elasticache,
   aws_route53 as route53,
   aws_rds as rds,
+  aws_elasticloadbalancingv2 as elbv2,
+  aws_elasticloadbalancingv2_targets as targets,
+  aws_autoscaling as autoscaling,
+  aws_iam as iam,
+  aws_certificatemanager as acm,
 } from "aws-cdk-lib";
 import { readFileSync } from "fs";
 import * as cdk from "aws-cdk-lib";
@@ -83,10 +88,7 @@ export class OpensociocracyStack extends cdk.Stack {
     cdk.Tags.of(redisCache).add("copilot-application", "opensociocracy");
     cdk.Tags.of(redisCache).add("copilot-environment", "production");
     cdk.Tags.of(redisCache).add("tenant", "opensociocracy");
-    cdk.Tags.of(redisCache).add(
-      "cost-center",
-      "webservices"
-    );
+    cdk.Tags.of(redisCache).add("cost-center", "webservices");
 
     new cdk.CfnOutput(this, `${stackName}CacheEndpointUrl`, {
       value: redisCache.attrRedisEndpointAddress,
@@ -128,7 +130,7 @@ export class OpensociocracyStack extends cdk.Stack {
 
     const rootVolume: ec2.BlockDevice = {
       deviceName: "/dev/sda1",
-      volume: ec2.BlockDeviceVolume.ebs(40), // Override the volume size in Gibibytes (GiB)
+      volume: ec2.BlockDeviceVolume.ebs(20), // Override the volume size in Gibibytes (GiB)
     };
 
     // 👇 create the EC2 instance
@@ -158,11 +160,8 @@ export class OpensociocracyStack extends cdk.Stack {
     ec2Instance.addUserData(userDataScript);
 
     cdk.Tags.of(ec2Instance).add("tenant", "opensociocracy");
-    cdk.Tags.of(ec2Instance).add(
-      "cost-center",
-      "webservices"
-    );
-    cdk.Tags.of(ec2Instance).add("Name", "Service-US-East-1-Compute-x86-1");
+    cdk.Tags.of(ec2Instance).add("cost-center", "webservices");
+    cdk.Tags.of(ec2Instance).add("Name", "Bastion-US-East-1-Compute-x86");
 
     // Elastic IP
     let eip = new ec2.CfnEIP(this, "Ip");
@@ -174,13 +173,13 @@ export class OpensociocracyStack extends cdk.Stack {
     });
 
     const hostedZone = route53.HostedZone.fromLookup(this, "HostedZone", {
-      domainName: 'service.opensociocracy.org',
+      domainName: "service.opensociocracy.org",
     });
 
-    new route53.ARecord(this, 'BastionARecord', {
+    new route53.ARecord(this, "BastionARecord", {
       zone: hostedZone,
       target: route53.RecordTarget.fromIpAddresses(eip.ref),
-      recordName: 'bastion.service.opensociocracy.org',
+      recordName: "bastion.service.opensociocracy.org",
     });
 
     const postgresCluster = new rds.DatabaseCluster(this, "db-cluster", {
@@ -219,10 +218,7 @@ export class OpensociocracyStack extends cdk.Stack {
     cdk.Tags.of(postgresCluster).add("copilot-application", "opensociocracy");
     cdk.Tags.of(postgresCluster).add("copilot-environment", "production");
     cdk.Tags.of(postgresCluster).add("tenant", "opensociocracy");
-    cdk.Tags.of(postgresCluster).add(
-      "cost-center",
-      "webservices"
-    );
+    cdk.Tags.of(postgresCluster).add("cost-center", "webservices");
 
     postgresCluster.connections.allowFrom(ec2SG, ec2.Port.tcp(5432));
 
@@ -233,6 +229,46 @@ export class OpensociocracyStack extends cdk.Stack {
     new cdk.CfnOutput(this, "postgresClusterSecretName", {
       // eslint-disable-next-line @typescript-eslint/no-non-null-asserted-optional-chain
       value: postgresCluster.secret?.secretName!,
+    });
+
+    const ami = ec2.MachineImage.lookup({
+      name: "AppServerCurrent",
+    });
+
+    const lb = new elbv2.ApplicationLoadBalancer(this, "LB", {
+      vpc,
+      internetFacing: true,
+    });
+
+    const certificateArn =
+      "arn:aws:acm:us-east-1:634272504630:certificate/09c624f6-670e-46e2-a1ab-cc64971e92a5";
+
+    const listenerCertificate =
+      elbv2.ListenerCertificate.fromArn(certificateArn);
+
+    // Add a listener on a particular port.
+    const listener = lb.addListener("Listener", {
+      port: 443,
+      certificates: [listenerCertificate],
+    });
+
+    const instanceType = ec2.InstanceType.of(
+      ec2.InstanceClass.BURSTABLE2,
+      ec2.InstanceSize.MEDIUM
+    );
+
+    const machineImage = new ec2.AmazonLinuxImage();
+
+    const asg = new autoscaling.AutoScalingGroup(this, "ASG", {
+      vpc,
+      instanceType,
+      machineImage,
+    });
+
+    // Add targets on a particular port.
+    listener.addTargets("AppFleet", {
+      port: 443,
+      targets: [asg],
     });
   }
 }
