@@ -1,6 +1,7 @@
 node_modules
-# .vitepress/dist
+.vitepress/dist
 .vitepress/cache
 .env
 .env-*
 *.log
+logs/gateway/nginx.pid
