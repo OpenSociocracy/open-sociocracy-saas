@@ -5,7 +5,7 @@ layout: home
 hero:
   name: "OpenSociocracy"
   text: "Build in public has started"
-  tagline: "Using S3 practices to build S3 tools"
+  tagline: "Using Sociocracy practices to build Sociocracy tools"
   actions:
     - theme: brand
       text: Help guide the effort
@@ -17,6 +17,6 @@ features:
   - title: Build in Public
     details: We're starting a build in public effort, <a href="https://handbook.opensociocracy.org">help us define it</a>.<br /><br /><a href="https://handbook.opensociocracy.org/about-us/why-build-in-public/">Why Build in Public?</a>
   - title: How to Contribute
-    details: We need experts to inform the correct path, and end users to define how they want to get there.<br /><br /><a href="https://handbook.opensociocracy.org/about-us/contributing/">Lend a hand</a>
+    details: We need experts to inform the correct path, and end users to define how they want to get there.<br /><br /><a href="https://handbook.opensociocracy.org/contributing/">Lend a hand</a>
 ---
 
