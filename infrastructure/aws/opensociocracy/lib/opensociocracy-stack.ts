@@ -177,7 +177,7 @@ export class OpensociocracyStack extends cdk.Stack {
       domainName: 'service.opensociocracy.org',
     });
 
-    new route53.ARecord(this, 'APIARecord', {
+    new route53.ARecord(this, 'BastionARecord', {
       zone: hostedZone,
       target: route53.RecordTarget.fromIpAddresses(eip.ref),
       recordName: 'bastion.service.opensociocracy.org',
