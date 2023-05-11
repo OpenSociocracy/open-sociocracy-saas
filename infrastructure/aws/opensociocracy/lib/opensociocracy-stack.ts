@@ -254,7 +254,7 @@ export class OpensociocracyStack extends cdk.Stack {
 
     const instanceType = ec2.InstanceType.of(
       ec2.InstanceClass.BURSTABLE2,
-      ec2.InstanceSize.MEDIUM
+      ec2.InstanceSize.SMALL
     );
 
     const machineImage = ami;
@@ -263,6 +263,9 @@ export class OpensociocracyStack extends cdk.Stack {
       vpc,
       instanceType,
       machineImage,
+      associatePublicIpAddress: true,
+      keyName: "opensociocracy-admin",
+      vpcSubnets: { subnetType: ec2.SubnetType.PUBLIC }
     });
 
     // Add targets on a particular port.
