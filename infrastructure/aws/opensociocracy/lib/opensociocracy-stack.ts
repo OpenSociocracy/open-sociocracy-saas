@@ -232,7 +232,7 @@ export class OpensociocracyStack extends cdk.Stack {
     });
 
     const ami = ec2.MachineImage.lookup({
-      name: "AppServerCurrent",
+      name: "server2",
     });
 
     const lb = new elbv2.ApplicationLoadBalancer(this, "LB", {
@@ -257,7 +257,7 @@ export class OpensociocracyStack extends cdk.Stack {
       ec2.InstanceSize.MEDIUM
     );
 
-    const machineImage = new ec2.AmazonLinuxImage();
+    const machineImage = ami;
 
     const asg = new autoscaling.AutoScalingGroup(this, "ASG", {
       vpc,
@@ -267,7 +267,7 @@ export class OpensociocracyStack extends cdk.Stack {
 
     // Add targets on a particular port.
     listener.addTargets("AppFleet", {
-      port: 443,
+      port: 80,
       targets: [asg],
     });
   }
