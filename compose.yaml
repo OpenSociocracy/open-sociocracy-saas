@@ -2,8 +2,9 @@ services:
   api:
     container_name: opensociocracy-api
     image: opensociocracy/api
+    restart: always
     build: ./api
-    command: ["npm", "run", "dev"]
+    command: ["npm", "run", "start"]
     # command: ["npm", "run", "dev:debug"]
     ports:
       - "3005:3005"
@@ -28,7 +29,7 @@ services:
       - POSTGRESQL_TABLE_SCHEMA=supertokens
     networks:
       - opensociocracy-net
-    restart: unless-stopped
+    restart: always
     healthcheck:
       test: >
         bash -c 'exec 3<>/dev/tcp/0.0.0.0/3567 && echo -e "GET /hello HTTP/1.1\r\nhost: 0.0.0.0:3567\r\nConnection: close\r\n\r\n" >&3 && cat <&3 | grep "Hello"'
@@ -39,17 +40,14 @@ services:
   gateway:
     image: ultri/open-platform-gateway:latest
     container_name: opensociocracy-gateway
-    restart: on-failure
+    restart: always
     ports:
       - "80:80"
     env_file: ".env"
     networks:
       - opensociocracy-net
     volumes:
-      - "./gateway/config/prod/nginx.conf:/usr/local/openresty/nginx/conf/nginx.conf"
-      - "./gateway/config/account.key:/etc/openresty/account.key"
-      - "./gateway/certs/default.key:/etc/openresty/default.key"
-      - "./gateway/certs/default.pem:/etc/openresty/default.pem"
+      - "./gateway/config/sites/prod/nginx.conf:/usr/local/openresty/nginx/conf/nginx.conf"
       - "./gateway/html:/usr/local/openresty/nginx/html"
       - "./logs/gateway:/usr/local/openresty/nginx/logs"
     depends_on:
