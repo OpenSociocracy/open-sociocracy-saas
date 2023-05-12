@@ -101,7 +101,7 @@ export class OpensociocracyStack extends cdk.Stack {
     const ec2SG = new ec2.SecurityGroup(this, `${stackName}Ec2SG`, {
       vpc: vpc,
       allowAllOutbound: true,
-      securityGroupName: "Docker Host Security Group",
+      securityGroupName: "Bastion Security Group",
     });
 
     ec2SG.connections.allowTo(
@@ -141,14 +141,20 @@ export class OpensociocracyStack extends cdk.Stack {
       },
       securityGroup: ec2SG,
       instanceType: ec2.InstanceType.of(
-        ec2.InstanceClass.T3, // One 't4g.small' per account free through end of 2023
-        ec2.InstanceSize.MEDIUM
+        ec2.InstanceClass.T4G, // One 't4g.small' per account free through end of 2023
+        ec2.InstanceSize.SMALL
       ),
       // Images from https://wiki.debian.org/Cloud/AmazonEC2Image/Bullseye
+      // ARM
       machineImage: new ec2.GenericLinuxImage({
-        "us-east-1": "ami-0fec2c2e2017f4e7b",
-        "us-west-1": "ami-0bf166b48bbe2bf7c",
+        "us-east-1": "ami-03ea090ddd75eb738",
+        "us-west-1": "ami-07a5b9d365ab10654",
       }),
+      // X86
+      //machineImage: new ec2.GenericLinuxImage({
+      //  "us-east-1": "ami-0fec2c2e2017f4e7b",
+      //  "us-west-1": "ami-0bf166b48bbe2bf7c",
+      //}),
       keyName: "opensociocracy-admin",
       blockDevices: [rootVolume],
     });
@@ -162,7 +168,7 @@ export class OpensociocracyStack extends cdk.Stack {
     cdk.Tags.of(ec2Instance).add("tenant", "opensociocracy");
     cdk.Tags.of(ec2Instance).add("cost-center", "webservices");
     cdk.Tags.of(ec2Instance).add("Name", "Bastion");
-
+ 
     // Elastic IP
     let eip = new ec2.CfnEIP(this, "Ip");
 
@@ -181,7 +187,7 @@ export class OpensociocracyStack extends cdk.Stack {
       target: route53.RecordTarget.fromIpAddresses(eip.ref),
       recordName: "bastion.service.opensociocracy.org",
     });
-
+  
     const postgresCluster = new rds.DatabaseCluster(this, "db-cluster", {
       engine: rds.DatabaseClusterEngine.auroraPostgres({
         version: rds.AuroraPostgresEngineVersion.VER_14_5,
