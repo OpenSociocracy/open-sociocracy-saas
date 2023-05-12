@@ -130,7 +130,7 @@ export class OpensociocracyStack extends cdk.Stack {
 
     const rootVolume: ec2.BlockDevice = {
       deviceName: "/dev/sda1",
-      volume: ec2.BlockDeviceVolume.ebs(20), // Override the volume size in Gibibytes (GiB)
+      volume: ec2.BlockDeviceVolume.ebs(30), // Override the volume size in Gibibytes (GiB)
     };
 
     // 👇 create the EC2 instance

@@ -18,9 +18,6 @@ services:
 
   supertokens:
     image: registry.supertokens.io/supertokens/supertokens-postgresql:4.6
-    depends_on:
-      postgres:
-        condition: service_healthy
     ports:
       - 3567:3567
     container_name: opensociocracy-supertokens
