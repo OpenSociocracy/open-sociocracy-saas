@@ -161,7 +161,7 @@ export class OpensociocracyStack extends cdk.Stack {
 
     cdk.Tags.of(ec2Instance).add("tenant", "opensociocracy");
     cdk.Tags.of(ec2Instance).add("cost-center", "webservices");
-    cdk.Tags.of(ec2Instance).add("Name", "Bastion-US-East-1-Compute-x86");
+    cdk.Tags.of(ec2Instance).add("Name", "Bastion");
 
     // Elastic IP
     let eip = new ec2.CfnEIP(this, "Ip");
@@ -232,7 +232,7 @@ export class OpensociocracyStack extends cdk.Stack {
     });
 
     const ami = ec2.MachineImage.lookup({
-      name: "server2",
+      name: "server2.0.1",
     });
 
     const lb = new elbv2.ApplicationLoadBalancer(this, "LB", {
