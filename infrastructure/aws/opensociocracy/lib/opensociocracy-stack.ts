@@ -232,7 +232,7 @@ export class OpensociocracyStack extends cdk.Stack {
     });
 
     const ami = ec2.MachineImage.lookup({
-      name: "server2.0.1",
+      name: "sever2.0.2",
     });
 
     const lb = new elbv2.ApplicationLoadBalancer(this, "LB", {
@@ -253,16 +253,16 @@ export class OpensociocracyStack extends cdk.Stack {
     });
 
     const instanceType = ec2.InstanceType.of(
-      ec2.InstanceClass.BURSTABLE2,
-      ec2.InstanceSize.SMALL
+      ec2.InstanceClass.T3,
+      ec2.InstanceSize.MEDIUM
     );
 
     const machineImage = ami;
 
     const asg = new autoscaling.AutoScalingGroup(this, "ASG", {
-      vpc,
-      instanceType,
-      machineImage,
+      vpc: vpc,
+      instanceType: instanceType,
+      machineImage: machineImage,
       associatePublicIpAddress: true,
       keyName: "opensociocracy-admin",
       vpcSubnets: { subnetType: ec2.SubnetType.PUBLIC }
