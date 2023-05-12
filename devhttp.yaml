@@ -22,6 +22,7 @@ services:
   api:
     container_name: opensociocracy-api
     image: opensociocracy/api
+    restart: always
     build: ./api
     command: ["npm", "run", "dev"]
     # command: ["npm", "run", "dev:debug"]
@@ -87,7 +88,7 @@ services:
   gateway:
     image: ultri/open-platform-gateway:latest
     container_name: opensociocracy-gateway
-    restart: on-failure
+    restart: always
     ports:
       - "80:80"
       - "443:443"
