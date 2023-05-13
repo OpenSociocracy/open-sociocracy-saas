@@ -16,7 +16,22 @@ export default fp(async (fastify) => {
         }
       ]
     },
-    hideUntagged: true
+    hideUntagged: true,
+    
   })
-  fastify.register(swaggerUi)
+  fastify.register(swaggerUi, {logo: {
+    type: 'image/png',
+    content: Buffer.from('https://handbook.opensociocracy.org/logo_light.jpg', 'base64')
+  },
+  theme: {
+    favicon: [
+      {
+        filename: 'favicon.png',
+        rel: 'icon',
+        sizes: '16x16',
+        type: 'image/png',
+        content: Buffer.from('https://handbook.opensociocracy.org/logo_light.jpg', 'base64')
+      }
+    ]
+  }})
 })
