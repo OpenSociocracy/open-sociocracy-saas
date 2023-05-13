@@ -5,6 +5,7 @@
     "dev": "DEBUG=com.supertokens tsx watch src",
     "build": "rm -rf build && tsx esbuild.ts",
     "start": "npm run build && node build",
+    "serve": "node build",
     "format": "prettier --write src",
     "lint": "prettier --check src && eslint --ignore-path .gitignore .",
     "ci": "npm format && npm lint",
