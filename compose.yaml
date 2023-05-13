@@ -4,17 +4,13 @@ services:
     image: opensociocracy/api
     restart: always
     build: ./api
-    command: ["npm", "run", "start"]
+    command: ["npm", "run", "serve"]
     # command: ["npm", "run", "dev:debug"]
     ports:
       - "3005:3005"
     env_file: ".env"
     networks:
       - opensociocracy-net
-    volumes:
-      - "./api/src/plugins:/usr/src/app/plugins"
-      - "./api/src/routes:/usr/src/app/routes"
-      - "./api/src/index.ts:/usr/src/app/index.ts"
 
   supertokens:
     image: registry.supertokens.io/supertokens/supertokens-postgresql:4.6
