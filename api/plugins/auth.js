@@ -70,7 +70,7 @@ async function auth(server, options) {
       }),
       Session.init(), // initializes session features
       Dashboard.init({
-        apiKey: server.config.ULTRI_SUPERTOKENS_DASHBOARD_API_KEY,
+        apiKey: server.config.SUPERTOKENS_DASHBOARD_API_KEY,
       }),
     ],
   });

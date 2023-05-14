@@ -40,7 +40,7 @@ async function configPlugin(server, options, done) {
       SUPERTOKENS_API_KEY: {
         type: "string",
       },
-      ULTRI_SUPERTOKENS_DASHBOARD_API_KEY: {
+      SUPERTOKENS_DASHBOARD_API_KEY: {
         type: "string",
       },
       SUPERTOKENS_APPNAME: {
