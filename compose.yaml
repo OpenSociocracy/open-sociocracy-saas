@@ -4,7 +4,7 @@ services:
     image: opensociocracy/api
     restart: always
     build: ./api
-    command: ["npm", "run", "serve"]
+    command: ["npm", "run", "start"]
     # command: ["npm", "run", "dev:debug"]
     ports:
       - "3005:3005"
