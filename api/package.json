@@ -1,7 +1,7 @@
 {
-  "name": "fastify-supertokens-example",
+  "name": "opensociocracy-sass-api",
   "version": "1.0.0",
-  "description": "A Fastify example codebase for using supertokens",
+  "description": "Fastify API for OPenSociocracy",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
@@ -18,8 +18,8 @@
     "url": "git+https://github.com/lirantal/fastify-supertokens-example.git"
   },
   "type": "module",
-  "author": "Liran Tal",
-  "license": "Apache-2.0",
+  "author": "Brian Winkers",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/lirantal/fastify-supertokens-example/issues"
   },
