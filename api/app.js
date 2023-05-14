@@ -26,10 +26,10 @@ export default async function appFramework() {
   fastify.register(postgres);
 
   // Redis
-  // fastify.register(redis);
+  fastify.register(redis);
 
   // SuperTokens middleware, handles everything under `/auth`
-  //fastify.register(auth);  
+  fastify.register(auth);  
 
   // Swagger
   fastify.register(swagger);
