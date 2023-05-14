@@ -11,7 +11,7 @@ services:
       retries: 10
     ports:
       - "5432:5432"
-    restart: always
+    restart: on-failure
     env_file: .env
     networks:
       - opensociocracy-net
@@ -22,24 +22,24 @@ services:
   api:
     container_name: opensociocracy-api
     image: opensociocracy/api
-    restart: always
+    restart: on-failure
     build: ./api
     command: ["npm", "run", "dev"]
     # command: ["npm", "run", "dev:debug"]
     ports:
-      - "3005:3005"
+      - "3000:3000"
     env_file: ".env"
     networks:
       - opensociocracy-net
     volumes:
-      - "./api/src/plugins:/usr/src/app/plugins"
-      - "./api/src/routes:/usr/src/app/routes"
-      - "./api/src/index.ts:/usr/src/app/index.ts"
+      - "./api/plugins:/usr/src/app/plugins"
+      - "./api/routes:/usr/src/app/routes"
+      - "./api/index.ts:/usr/src/app/index.ts"
 
   redis:
     image: redis:7.0.7
     container_name: opensociocracy-redis
-    restart: always
+    restart: on-failure
     ports:
       - "6379:6379"
     networks:
@@ -62,7 +62,7 @@ services:
       - POSTGRESQL_TABLE_SCHEMA=supertokens
     networks:
       - opensociocracy-net
-    restart: always
+    restart: on-failure
     healthcheck:
       test: >
         bash -c 'exec 3<>/dev/tcp/0.0.0.0/3567 && echo -e "GET /hello HTTP/1.1\r\nhost: 0.0.0.0:3567\r\nConnection: close\r\n\r\n" >&3 && cat <&3 | grep "Hello"'
@@ -73,7 +73,7 @@ services:
   smtp4dev:
     container_name: opensociocracy-smtp4dev
     image: rnwood/smtp4dev:v3
-    restart: always
+    restart: on-failure
     env_file: .env
     networks:
       - opensociocracy-net
@@ -88,7 +88,7 @@ services:
   gateway:
     image: ultri/open-platform-gateway:latest
     container_name: opensociocracy-gateway
-    restart: always
+    restart: on-failure
     ports:
       - "80:80"
       - "443:443"
