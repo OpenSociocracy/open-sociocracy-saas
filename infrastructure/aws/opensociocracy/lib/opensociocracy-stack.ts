@@ -238,7 +238,7 @@ export class OpensociocracyStack extends cdk.Stack {
     });
 
     const ami = ec2.MachineImage.lookup({
-      name: "sever2.0.2",
+      name: "server2.0.5",
     });
 
     const lb = new elbv2.ApplicationLoadBalancer(this, "LB", {
