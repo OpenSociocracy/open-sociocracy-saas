@@ -1,27 +1,29 @@
 import fastifyEnv from "@fastify/env";
 import fastifyPlugin from "fastify-plugin";
 
-async function configPlugin(fastify: any, options: any, done: any) {
+async function configPlugin(server, options, done) {
   const schema = {
     type: "object",
     required: [
-      "HTTP_HOST",
       "HTTP_PORT",
       "SUPERTOKENS_CONNECTION_URI",
       "SUPERTOKENS_API_KEY",
+      "SUPERTOKENS_DASHBOARD_API_KEY",
       "SUPERTOKENS_APPNAME",
       "SUPERTOKENS_API_DOMAIN",
       "SUPERTOKENS_API_BASE_PATH",
       "SUPERTOKENS_WEBSITE_DOMAIN",
       "SUPERTOKENS_WEBSITE_BASE_PATH",
-      "SUPERTOKENS_3RD_PARTY_GOOGLE_CLIENT_ID",
-      "SUPERTOKENS_3RD_PARTY_GOOGLE_CLIENT_SECRET",
-      "SUPERTOKENS_3RD_PARTY_GITHUB_CLIENT_ID",
-      "SUPERTOKENS_3RD_PARTY_GITHUB_CLIENT_SECRET",
       "CORS_ORIGIN_URL",
+      "REDIS_URI",
       "API_POSTGRES_URI",
-      "API_USER",
-      "API_PASS"
+      "SMTP_HOST",
+      "SMTP_USER",
+      "SMTP_PASSWORD",
+      "SMTP_PORT",
+      "SMTP_FROM",
+      "SMTP_EMAIL",
+      "SMTP_SECURE"
     ],
     properties: {
       HTTP_PORT: {
@@ -36,6 +38,9 @@ async function configPlugin(fastify: any, options: any, done: any) {
         type: "string",
       },
       SUPERTOKENS_API_KEY: {
+        type: "string",
+      },
+      SUPERTOKENS_DASHBOARD_API_KEY: {
         type: "string",
       },
       SUPERTOKENS_APPNAME: {
@@ -68,36 +73,34 @@ async function configPlugin(fastify: any, options: any, done: any) {
       CORS_ORIGIN_URL: {
         type: "string",
       },
-      SMTP_HOST: {
-        type: "string",
-      },
-      SMTP_USER: {
-        type: "string",
-      },
-      SMTP_PASSWORD: {
-        type: "string",
-      },
-      SMTP_PORT: {
-        type: "string",
-      },
-      SMTP_FROM: {
-        type: "string",
-      },
-      SMTP_EMAIL: {
-        type: "string",
-      },
-      SMTP_SECURE: {
-        type: "boolean",
+      REDIS_URI: {
+        type: "string"
       },
       API_POSTGRES_URI: {
-        type: "string",
+        type: "string"
       },
-      API_USER: {
-        type: "string",
+      SMTP_HOST: {
+        type: "string"
       },
-      API_PASS: {
-        type: "string",
+      SMTP_USER: {
+        type: "string"
       },
+      SMTP_PASSWORD: {
+        type: "string"
+      },
+      SMTP_PORT: {
+        type: "string"
+      },
+      SMTP_FROM: {
+        type: "string"
+      },
+      SMTP_EMAIL: {
+        type: "string"
+      },
+      SMTP_SECURE: {
+        type: "boolean"
+      }
+
     },
   };
 
@@ -117,7 +120,7 @@ async function configPlugin(fastify: any, options: any, done: any) {
     removeAdditional: true,
   };
 
-  return fastifyEnv(fastify, configOptions, done);
+  return fastifyEnv(server, configOptions, done);
 }
 
 export default fastifyPlugin(configPlugin);

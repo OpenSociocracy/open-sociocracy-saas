@@ -27,14 +27,14 @@ services:
     command: ["npm", "run", "dev"]
     # command: ["npm", "run", "dev:debug"]
     ports:
-      - "3005:3005"
+      - "3000:3000"
     env_file: ".env"
     networks:
       - opensociocracy-net
     volumes:
-      - "./api/src/plugins:/usr/src/app/plugins"
-      - "./api/src/routes:/usr/src/app/routes"
-      - "./api/src/index.ts:/usr/src/app/index.ts"
+      - "./api/plugins:/usr/src/app/plugins"
+      - "./api/routes:/usr/src/app/routes"
+      - "./api/index.ts:/usr/src/app/index.ts"
 
   redis:
     image: redis:7.0.7
