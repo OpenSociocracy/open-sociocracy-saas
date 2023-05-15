@@ -16,5 +16,6 @@
   "ami:account=634272504630:filters.image-type.0=machine:filters.name.0=server2.0.1:filters.state.0=available:region=us-east-1": "ami-052f33b636c427bae",
   "ami:account=634272504630:filters.image-type.0=machine:filters.name.0=sever2.0.2:filters.state.0=available:region=us-east-1": "ami-0f38d656e16f48e12",
   "ami:account=634272504630:filters.image-type.0=machine:filters.name.0=server2.0.3:filters.state.0=available:region=us-east-1": "ami-0aef6ca247bb82f4b",
-  "ami:account=634272504630:filters.image-type.0=machine:filters.name.0=server2.0.5:filters.state.0=available:region=us-east-1": "ami-00f7ff9a32c7b5adb"
+  "ami:account=634272504630:filters.image-type.0=machine:filters.name.0=server2.0.5:filters.state.0=available:region=us-east-1": "ami-00f7ff9a32c7b5adb",
+  "ami:account=634272504630:filters.image-type.0=machine:filters.name.0=server2.0.6:filters.state.0=available:region=us-east-1": "ami-088a9bf14aa6762a2"
 }
