@@ -6,10 +6,12 @@ Nuggets provide a common way of storing our data.
 
 * Agreement
 * Asset
+* Comment
 * Domain
 * Driver
 * Logbook
 * Proposal
+* Reply
 
 ## Adding a Nugget Type
 

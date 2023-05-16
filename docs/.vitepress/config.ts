@@ -19,15 +19,15 @@ export default defineConfig({
     // https://vitepress.dev/reference/default-theme-config
     nav: [
       { text: 'Home', link: '/' },
-      { text: 'Join in', link: 'https://handbook.opensociocracy.org/contributing/' }
-      { text: 'Tech Docs', link: '(/technical-docs/' }
+      { text: 'Join in', link: 'https://handbook.opensociocracy.org/contributing/' },
+      { text: 'Tech Docs', link: '/technical-docs/' },
     ],
 
     socialLinks: [
       { icon: 'github', link: 'https://github.com/orgs/OpenSociocracy' },
       { icon: 'twitter', link: 'https://twitter.com/OpenSociocracy'},
       { icon: 'facebook', link: 'https://www.facebook.com/OpenSociocracy/'},
-      { icon: 'mastodon', link: 'https://fosstodon.org/@opensociocracy'}
+      { icon: 'mastodon', link: 'https://fosstodon.org/@opensociocracy'},
     ],
 
     footer: {
