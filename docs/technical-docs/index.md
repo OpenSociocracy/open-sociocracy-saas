@@ -18,5 +18,5 @@ The platform is any part of this technology solution.
 
 ## Reactions
 
-[Reactions](/technical-docs/reactions/) represent a members' response to a [nugget]. We still need to define the set of reactions.
+[Reactions](/technical-docs/reactions/) represent a members' response to a [nugget](/technical-docs/nuggets/). We still need to define the set of reactions.
 
