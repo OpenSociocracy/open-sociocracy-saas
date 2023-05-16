@@ -1,8 +1,8 @@
 node_modules
-.vitepress/dist
-.vitepress/cache
+docs/.vitepress/dist
+docs/.vitepress/cache
 .env
 .env-*
 *.log
 logs/gateway/nginx.pid
-docs/.vitepress/dist
+
