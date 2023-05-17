@@ -28,6 +28,7 @@ export default defineConfig({
       { icon: 'twitter', link: 'https://twitter.com/OpenSociocracy'},
       { icon: 'facebook', link: 'https://www.facebook.com/OpenSociocracy/'},
       { icon: 'mastodon', link: 'https://fosstodon.org/@opensociocracy'},
+      { icon: "linkedin", link: "https://www.linkedin.com/company/opensociocracy/" },
     ],
 
     footer: {
