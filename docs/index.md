@@ -5,7 +5,7 @@ layout: home
 hero:
   name: "OpenSociocracy"
   text: "A pragmatic approach to Sociocracy"
-  tagline: "Our build in public has started"
+  tagline: "Our build in public has started, join in."
   actions:
     - theme: brand
       text: Help guide the effort
