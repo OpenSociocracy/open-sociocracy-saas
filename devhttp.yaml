@@ -11,23 +11,23 @@ services:
       retries: 10
     ports:
       - "5432:5432"
-    restart: on-failure
+    restart: no
     env_file: .env
     networks:
       - opensociocracy-net
     volumes:
       - opensociocracy-pg:/var/lib/postgres/data
-      - ./postgres:/docker-entrypoint-initdb.d/
+      - ./docker-postgres:/docker-entrypoint-initdb.d/
 
   api:
     container_name: opensociocracy-api
     image: opensociocracy/api
-    restart: on-failure
+    restart: no
     build: ./api
-    command: ["npm", "run", "dev"]
+    command: ["npm", "run", "dev:debug"]
     # command: ["npm", "run", "dev:debug"]
     ports:
-      - "3000:3000"
+      - "3005:3005"
     env_file: ".env"
     networks:
       - opensociocracy-net
@@ -39,7 +39,7 @@ services:
   redis:
     image: redis:7.0.7
     container_name: opensociocracy-redis
-    restart: on-failure
+    restart: no
     ports:
       - "6379:6379"
     networks:
@@ -62,7 +62,7 @@ services:
       - POSTGRESQL_TABLE_SCHEMA=supertokens
     networks:
       - opensociocracy-net
-    restart: on-failure
+    restart: no
     healthcheck:
       test: >
         bash -c 'exec 3<>/dev/tcp/0.0.0.0/3567 && echo -e "GET /hello HTTP/1.1\r\nhost: 0.0.0.0:3567\r\nConnection: close\r\n\r\n" >&3 && cat <&3 | grep "Hello"'
@@ -73,7 +73,7 @@ services:
   smtp4dev:
     container_name: opensociocracy-smtp4dev
     image: rnwood/smtp4dev:v3
-    restart: on-failure
+    restart: no
     env_file: .env
     networks:
       - opensociocracy-net
@@ -88,7 +88,7 @@ services:
   gateway:
     image: ultri/open-platform-gateway:latest
     container_name: opensociocracy-gateway
-    restart: on-failure
+    restart: no
     ports:
       - "80:80"
       - "443:443"
@@ -96,7 +96,7 @@ services:
     networks:
       - opensociocracy-net
     volumes:
-      - "./gateway/config/sites/prod/nginx.conf:/usr/local/openresty/nginx/conf/nginx.conf"
+      - "./gateway/config/sites/dev/nginx.conf:/usr/local/openresty/nginx/conf/nginx.conf"
       - "./gateway/config/account.key:/etc/openresty/account.key"
       - "./gateway/certs/default.key:/etc/openresty/default.key"
       - "./gateway/certs/default.pem:/etc/openresty/default.pem"

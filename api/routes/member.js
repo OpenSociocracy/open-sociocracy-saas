@@ -28,11 +28,9 @@ async function memberRoutes(server, options) {
       },
     },
     async (request, reply) => {
-      let userId = request.session.getUserId();
+      let memberUid = request.session.getUserId();
 
-      console.log("MEMBER ACCOUNTS");
-
-      const accounts = await server.accountService.getMemberAccounts(userId);
+      const accounts = await server.accountService.getMemberAccounts(memberUid);
 
       return {
         accounts: accounts,

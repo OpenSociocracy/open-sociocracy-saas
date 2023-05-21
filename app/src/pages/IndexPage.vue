@@ -1,5 +1,5 @@
 <template>
-  <q-page class="row items-center justify-evenly">
+  <q-page class="row items-center justify-evenly" v-if="!auth.isSignedIn">
     <div class="text-h1 full-width text-center">{{ $t('homepage.heading') }}</div>
     <div class="text-h2 full-width  text-center">{{ $t('homepage.tagline') }}</div>
     <div class="full-width  text-center">
@@ -7,15 +7,26 @@
         size="xl"
         :label="$t('homepage.button')"
         color="primary"
-        :to="{ name: 'new-article'}"
+        @click="triggerSignInDialog"
       ></q-btn>
     </div>
+  </q-page>
+  <q-page class="row items-center justify-evenly" v-if="auth.isSignedIn">
+    <div class="text-h1 full-width text-center"></div>
+
   </q-page>
 </template>
 
 <script setup lang="ts">
 
+import { useAuthStore } from '../stores/auth';
+const auth = useAuthStore();
 
+const triggerSignInDialog = async () => {
+  auth.setTargetUrl('/member');
+  auth.setSignInRequired(true);
+  console.log(auth.targetUrl)
+}
 
 </script>
 

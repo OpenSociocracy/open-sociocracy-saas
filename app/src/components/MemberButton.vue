@@ -2,6 +2,7 @@
   <q-btn-dropdown flat dense no-caps dropdown-icon="mdi-account">
     <q-list>
 
+      <!--
       <q-expansion-item
         expand-separator
         icon="mdi-account-switch"
@@ -18,6 +19,7 @@
           </q-card-section>
         </q-card>
       </q-expansion-item>
+      -->
 
       <q-item clickable>
         <q-item-section avatar>

@@ -10,32 +10,39 @@ async function accountRoutes(server, options) {
   server.register(accountServicePlugin);
 
   server.get(
-    "/account",
+    "/accounts",
     {
       preHandler: verifySession(),
       schema: {
-        description: "Return account info",
+        description: "Return authenticated member's accounts",
         tags: ["account"],
         response: {
           200: {
             description: "Success Response",
             type: "object",
             properties: {
-              name: { type: "string" },
+              accounts: { type: "array" },
             },
           },
         },
       },
     },
     async (request, reply) => {
+      
+      let memberUid = request.session.getUserId();
+
+      //console.log('wtf')
+
+      const accounts = await server.accountService.getMemberAccounts(memberUid);
+
       return {
-        name: "Brian Winkers",
+        accounts: accounts,
       };
     }
   );
 
   server.post(
-    "/account",
+    "/accounts",
     {
       preHandler: verifySession(),
       schema: {

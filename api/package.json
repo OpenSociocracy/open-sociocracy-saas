@@ -35,7 +35,7 @@
     "fastify": "^4.10.2",
     "fastify-plugin": "^4.4.0",
     "pg": "^8.9.0",
-    "supertokens-node": "^12.1.4"
+    "supertokens-node": "^13.5.0"
   },
   "private": true,
   "devDependencies": {
