@@ -16,6 +16,7 @@ services:
     networks:
       - opensociocracy-net
     volumes:
+      - "./docker-postgres/sql:/sql"
       - opensociocracy-pg:/var/lib/postgres/data
       - ./docker-postgres:/docker-entrypoint-initdb.d/
 

@@ -1,5 +1,30 @@
 --
--- Name: create_account(character varying, uuid); Type: FUNCTION; Schema: opensociocracy_api; Owner: opensociocracy_api
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 14.7 (Debian 14.7-1.pgdg110+1)
+-- Dumped by pg_dump version 14.7 (Ubuntu 14.7-0ubuntu0.22.04.1)
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+--
+-- Name: opensociocracy_api; Type: SCHEMA; Schema: -; Owner: -
+--
+
+CREATE SCHEMA opensociocracy_api;
+
+
+--
+-- Name: create_account(character varying, uuid); Type: FUNCTION; Schema: opensociocracy_api; Owner: -
 --
 
 CREATE FUNCTION opensociocracy_api.create_account(name_in character varying, owner_uid uuid) RETURNS TABLE(id bigint, uid uuid, created_at timestamp without time zone)
@@ -26,10 +51,8 @@ END;
 $$;
 
 
-ALTER FUNCTION opensociocracy_api.create_account(name_in character varying, owner_uid uuid) OWNER TO opensociocracy_api;
-
 --
--- Name: create_account_nugget(character varying, character varying, character varying, bigint, uuid); Type: FUNCTION; Schema: opensociocracy_api; Owner: opensociocracy_api
+-- Name: create_account_nugget(character varying, character varying, character varying, bigint, uuid); Type: FUNCTION; Schema: opensociocracy_api; Owner: -
 --
 
 CREATE FUNCTION opensociocracy_api.create_account_nugget(public_title character varying, internal_name character varying, nugget_type character varying, account_uid bigint, member_uid uuid, OUT id bigint, OUT uid uuid, OUT created_at timestamp without time zone, OUT account_id bigint) RETURNS record
@@ -61,11 +84,8 @@ END;
 $_$;
 
 
-ALTER FUNCTION opensociocracy_api.create_account_nugget(public_title character varying, internal_name character varying, nugget_type character varying, account_uid bigint, member_uid uuid, OUT id bigint, OUT uid uuid, OUT created_at timestamp without time zone, OUT account_id bigint) OWNER TO opensociocracy_api;
-
-
 --
--- Name: create_member_nugget(character varying, character varying, character varying, uuid, jsonb); Type: FUNCTION; Schema: opensociocracy_api; Owner: opensociocracy_api
+-- Name: create_member_nugget(character varying, character varying, character varying, uuid, jsonb); Type: FUNCTION; Schema: opensociocracy_api; Owner: -
 --
 
 CREATE FUNCTION opensociocracy_api.create_member_nugget(public_title character varying, internal_name character varying, nugget_type character varying, member_uid uuid, blocks jsonb, OUT id bigint, OUT uid uuid, OUT created_at timestamp without time zone, OUT account_id bigint) RETURNS record
@@ -97,10 +117,8 @@ END;
 $_$;
 
 
-ALTER FUNCTION opensociocracy_api.create_member_nugget(public_title character varying, internal_name character varying, nugget_type character varying, member_uid uuid, blocks jsonb, OUT id bigint, OUT uid uuid, OUT created_at timestamp without time zone, OUT account_id bigint) OWNER TO opensociocracy_api;
-
 --
--- Name: get_member_account(uuid); Type: FUNCTION; Schema: opensociocracy_api; Owner: opensociocracy_api
+-- Name: get_member_account(uuid); Type: FUNCTION; Schema: opensociocracy_api; Owner: -
 --
 
 CREATE FUNCTION opensociocracy_api.get_member_account(uid_in uuid) RETURNS bigint
@@ -121,10 +139,8 @@ END;
 $$;
 
 
-ALTER FUNCTION opensociocracy_api.get_member_account(uid_in uuid) OWNER TO opensociocracy_api;
-
 --
--- Name: get_member_accounts(uuid); Type: FUNCTION; Schema: opensociocracy_api; Owner: postgres
+-- Name: get_member_accounts(uuid); Type: FUNCTION; Schema: opensociocracy_api; Owner: -
 --
 
 CREATE FUNCTION opensociocracy_api.get_member_accounts(uid_in uuid) RETURNS TABLE("accountUid" uuid, "createdAt" timestamp without time zone, name character varying, personal boolean)
@@ -143,10 +159,8 @@ END;
 $$;
 
 
-ALTER FUNCTION opensociocracy_api.get_member_accounts(uid_in uuid) OWNER TO opensociocracy_api;
-
 --
--- Name: get_member_nuggets_by_type(uuid, text); Type: FUNCTION; Schema: opensociocracy_api; Owner: postgres
+-- Name: get_member_nuggets_by_type(uuid, text); Type: FUNCTION; Schema: opensociocracy_api; Owner: -
 --
 
 CREATE FUNCTION opensociocracy_api.get_member_nuggets_by_type(member_uid_in uuid, nugget_type_in text) RETURNS TABLE("nuggetUid" uuid, "createdAt" timestamp without time zone, "updatedAt" timestamp without time zone, "pubAt" timestamp without time zone, "unPubAt" timestamp without time zone, "publicTitle" character varying, "internalName" character varying, "nuggetType" character varying, blocks jsonb)
@@ -175,10 +189,8 @@ END;
 $$;
 
 
-ALTER FUNCTION opensociocracy_api.get_member_nuggets_by_type(member_uid_in uuid, nugget_type_in text) OWNER TO opensociocracy_api;
-
 --
--- Name: get_nugget_type_id(character varying, bigint); Type: FUNCTION; Schema: opensociocracy_api; Owner: opensociocracy_api
+-- Name: get_nugget_type_id(character varying, bigint); Type: FUNCTION; Schema: opensociocracy_api; Owner: -
 --
 
 CREATE FUNCTION opensociocracy_api.get_nugget_type_id(type_name_in character varying, account_id_in bigint) RETURNS bigint
@@ -196,10 +208,8 @@ END;
 $$;
 
 
-ALTER FUNCTION opensociocracy_api.get_nugget_type_id(type_name_in character varying, account_id_in bigint) OWNER TO opensociocracy_api;
-
 --
--- Name: new_member_from_user(); Type: FUNCTION; Schema: opensociocracy_api; Owner: postgres
+-- Name: new_member_from_user(); Type: FUNCTION; Schema: opensociocracy_api; Owner: -
 --
 
 CREATE FUNCTION opensociocracy_api.new_member_from_user() RETURNS trigger
@@ -234,10 +244,8 @@ END;
 $$;
 
 
-ALTER FUNCTION opensociocracy_api.new_member_from_user() OWNER TO opensociocracy_api;
-
 --
--- Name: register_member(text, text, numeric); Type: FUNCTION; Schema: opensociocracy_api; Owner: opensociocracy_api
+-- Name: register_member(text, text, numeric); Type: FUNCTION; Schema: opensociocracy_api; Owner: -
 --
 
 CREATE FUNCTION opensociocracy_api.register_member(uid_in text, email_in text, time_joined_in numeric) RETURNS text
@@ -256,14 +264,12 @@ END;
 $$;
 
 
-ALTER FUNCTION opensociocracy_api.register_member(uid_in text, email_in text, time_joined_in numeric) OWNER TO opensociocracy_api;
-
 SET default_tablespace = '';
 
 SET default_table_access_method = heap;
 
 --
--- Name: account; Type: TABLE; Schema: opensociocracy_api; Owner: opensociocracy_api
+-- Name: account; Type: TABLE; Schema: opensociocracy_api; Owner: -
 --
 
 CREATE TABLE opensociocracy_api.account (
@@ -275,10 +281,8 @@ CREATE TABLE opensociocracy_api.account (
 );
 
 
-ALTER TABLE opensociocracy_api.account OWNER TO opensociocracy_api;
-
 --
--- Name: account_group; Type: TABLE; Schema: opensociocracy_api; Owner: postgres
+-- Name: account_group; Type: TABLE; Schema: opensociocracy_api; Owner: -
 --
 
 CREATE TABLE opensociocracy_api.account_group (
@@ -291,10 +295,8 @@ CREATE TABLE opensociocracy_api.account_group (
 );
 
 
-ALTER TABLE opensociocracy_api.account_group OWNER TO opensociocracy_api;
-
 --
--- Name: account_group_id_seq; Type: SEQUENCE; Schema: opensociocracy_api; Owner: postgres
+-- Name: account_group_id_seq; Type: SEQUENCE; Schema: opensociocracy_api; Owner: -
 --
 
 CREATE SEQUENCE opensociocracy_api.account_group_id_seq
@@ -305,17 +307,15 @@ CREATE SEQUENCE opensociocracy_api.account_group_id_seq
     CACHE 1;
 
 
-ALTER TABLE opensociocracy_api.account_group_id_seq OWNER TO opensociocracy_api;
-
 --
--- Name: account_group_id_seq; Type: SEQUENCE OWNED BY; Schema: opensociocracy_api; Owner: postgres
+-- Name: account_group_id_seq; Type: SEQUENCE OWNED BY; Schema: opensociocracy_api; Owner: -
 --
 
 ALTER SEQUENCE opensociocracy_api.account_group_id_seq OWNED BY opensociocracy_api.account_group.id;
 
 
 --
--- Name: account_group_member; Type: TABLE; Schema: opensociocracy_api; Owner: opensociocracy_api
+-- Name: account_group_member; Type: TABLE; Schema: opensociocracy_api; Owner: -
 --
 
 CREATE TABLE opensociocracy_api.account_group_member (
@@ -325,10 +325,8 @@ CREATE TABLE opensociocracy_api.account_group_member (
 );
 
 
-ALTER TABLE opensociocracy_api.account_group_member OWNER TO opensociocracy_api;
-
 --
--- Name: account_id_seq; Type: SEQUENCE; Schema: opensociocracy_api; Owner: opensociocracy_api
+-- Name: account_id_seq; Type: SEQUENCE; Schema: opensociocracy_api; Owner: -
 --
 
 CREATE SEQUENCE opensociocracy_api.account_id_seq
@@ -339,17 +337,15 @@ CREATE SEQUENCE opensociocracy_api.account_id_seq
     CACHE 1;
 
 
-ALTER TABLE opensociocracy_api.account_id_seq OWNER TO opensociocracy_api;
-
 --
--- Name: account_id_seq; Type: SEQUENCE OWNED BY; Schema: opensociocracy_api; Owner: opensociocracy_api
+-- Name: account_id_seq; Type: SEQUENCE OWNED BY; Schema: opensociocracy_api; Owner: -
 --
 
 ALTER SEQUENCE opensociocracy_api.account_id_seq OWNED BY opensociocracy_api.account.id;
 
 
 --
--- Name: account_member; Type: TABLE; Schema: opensociocracy_api; Owner: opensociocracy_api
+-- Name: account_member; Type: TABLE; Schema: opensociocracy_api; Owner: -
 --
 
 CREATE TABLE opensociocracy_api.account_member (
@@ -361,10 +357,8 @@ CREATE TABLE opensociocracy_api.account_member (
 );
 
 
-ALTER TABLE opensociocracy_api.account_member OWNER TO opensociocracy_api;
-
 --
--- Name: account_nugget_type; Type: TABLE; Schema: opensociocracy_api; Owner: opensociocracy_api
+-- Name: account_nugget_type; Type: TABLE; Schema: opensociocracy_api; Owner: -
 --
 
 CREATE TABLE opensociocracy_api.account_nugget_type (
@@ -375,10 +369,8 @@ CREATE TABLE opensociocracy_api.account_nugget_type (
 );
 
 
-ALTER TABLE opensociocracy_api.account_nugget_type OWNER TO opensociocracy_api;
-
 --
--- Name: account_role; Type: TABLE; Schema: opensociocracy_api; Owner: postgres
+-- Name: account_role; Type: TABLE; Schema: opensociocracy_api; Owner: -
 --
 
 CREATE TABLE opensociocracy_api.account_role (
@@ -391,10 +383,8 @@ CREATE TABLE opensociocracy_api.account_role (
 );
 
 
-ALTER TABLE opensociocracy_api.account_role OWNER TO opensociocracy_api;
-
 --
--- Name: account_role_id_seq; Type: SEQUENCE; Schema: opensociocracy_api; Owner: postgres
+-- Name: account_role_id_seq; Type: SEQUENCE; Schema: opensociocracy_api; Owner: -
 --
 
 CREATE SEQUENCE opensociocracy_api.account_role_id_seq
@@ -405,17 +395,15 @@ CREATE SEQUENCE opensociocracy_api.account_role_id_seq
     CACHE 1;
 
 
-ALTER TABLE opensociocracy_api.account_role_id_seq OWNER TO opensociocracy_api;
-
 --
--- Name: account_role_id_seq; Type: SEQUENCE OWNED BY; Schema: opensociocracy_api; Owner: postgres
+-- Name: account_role_id_seq; Type: SEQUENCE OWNED BY; Schema: opensociocracy_api; Owner: -
 --
 
 ALTER SEQUENCE opensociocracy_api.account_role_id_seq OWNED BY opensociocracy_api.account_role.id;
 
 
 --
--- Name: role; Type: TABLE; Schema: opensociocracy_api; Owner: postgres
+-- Name: role; Type: TABLE; Schema: opensociocracy_api; Owner: -
 --
 
 CREATE TABLE opensociocracy_api.role (
@@ -426,10 +414,8 @@ CREATE TABLE opensociocracy_api.role (
 );
 
 
-ALTER TABLE opensociocracy_api.role OWNER TO opensociocracy_api;
-
 --
--- Name: all_perms; Type: VIEW; Schema: opensociocracy_api; Owner: postgres
+-- Name: all_perms; Type: VIEW; Schema: opensociocracy_api; Owner: -
 --
 
 CREATE VIEW opensociocracy_api.all_perms AS
@@ -451,10 +437,8 @@ CREATE VIEW opensociocracy_api.all_perms AS
   GROUP BY a.id, a.name;
 
 
-ALTER TABLE opensociocracy_api.all_perms OWNER TO opensociocracy_api;
-
 --
--- Name: block_type; Type: TABLE; Schema: opensociocracy_api; Owner: opensociocracy_api
+-- Name: block_type; Type: TABLE; Schema: opensociocracy_api; Owner: -
 --
 
 CREATE TABLE opensociocracy_api.block_type (
@@ -464,10 +448,8 @@ CREATE TABLE opensociocracy_api.block_type (
 );
 
 
-ALTER TABLE opensociocracy_api.block_type OWNER TO opensociocracy_api;
-
 --
--- Name: block_types_id_seq; Type: SEQUENCE; Schema: opensociocracy_api; Owner: opensociocracy_api
+-- Name: block_types_id_seq; Type: SEQUENCE; Schema: opensociocracy_api; Owner: -
 --
 
 CREATE SEQUENCE opensociocracy_api.block_types_id_seq
@@ -478,17 +460,15 @@ CREATE SEQUENCE opensociocracy_api.block_types_id_seq
     CACHE 1;
 
 
-ALTER TABLE opensociocracy_api.block_types_id_seq OWNER TO opensociocracy_api;
-
 --
--- Name: block_types_id_seq; Type: SEQUENCE OWNED BY; Schema: opensociocracy_api; Owner: opensociocracy_api
+-- Name: block_types_id_seq; Type: SEQUENCE OWNED BY; Schema: opensociocracy_api; Owner: -
 --
 
 ALTER SEQUENCE opensociocracy_api.block_types_id_seq OWNED BY opensociocracy_api.block_type.id;
 
 
 --
--- Name: member; Type: TABLE; Schema: opensociocracy_api; Owner: opensociocracy_api
+-- Name: member; Type: TABLE; Schema: opensociocracy_api; Owner: -
 --
 
 CREATE TABLE opensociocracy_api.member (
@@ -498,10 +478,8 @@ CREATE TABLE opensociocracy_api.member (
 );
 
 
-ALTER TABLE opensociocracy_api.member OWNER TO opensociocracy_api;
-
 --
--- Name: member_accounts; Type: VIEW; Schema: opensociocracy_api; Owner: postgres
+-- Name: member_accounts; Type: VIEW; Schema: opensociocracy_api; Owner: -
 --
 
 CREATE VIEW opensociocracy_api.member_accounts AS
@@ -524,10 +502,8 @@ CREATE VIEW opensociocracy_api.member_accounts AS
      LEFT JOIN opensociocracy_api.account_group ag ON ((ag.id = agm.account_group_id)));
 
 
-ALTER TABLE opensociocracy_api.member_accounts OWNER TO opensociocracy_api;
-
 --
--- Name: member_id_seq; Type: SEQUENCE; Schema: opensociocracy_api; Owner: opensociocracy_api
+-- Name: member_id_seq; Type: SEQUENCE; Schema: opensociocracy_api; Owner: -
 --
 
 CREATE SEQUENCE opensociocracy_api.member_id_seq
@@ -538,17 +514,15 @@ CREATE SEQUENCE opensociocracy_api.member_id_seq
     CACHE 1;
 
 
-ALTER TABLE opensociocracy_api.member_id_seq OWNER TO opensociocracy_api;
-
 --
--- Name: member_id_seq; Type: SEQUENCE OWNED BY; Schema: opensociocracy_api; Owner: opensociocracy_api
+-- Name: member_id_seq; Type: SEQUENCE OWNED BY; Schema: opensociocracy_api; Owner: -
 --
 
 ALTER SEQUENCE opensociocracy_api.member_id_seq OWNED BY opensociocracy_api.member.id;
 
 
 --
--- Name: member_permissions; Type: VIEW; Schema: opensociocracy_api; Owner: postgres
+-- Name: member_permissions; Type: VIEW; Schema: opensociocracy_api; Owner: -
 --
 
 CREATE VIEW opensociocracy_api.member_permissions AS
@@ -560,10 +534,8 @@ CREATE VIEW opensociocracy_api.member_permissions AS
      JOIN opensociocracy_api.role r ON (((r.name)::text = ANY (ma."accountRoles"))));
 
 
-ALTER TABLE opensociocracy_api.member_permissions OWNER TO opensociocracy_api;
-
 --
--- Name: nugget; Type: TABLE; Schema: opensociocracy_api; Owner: opensociocracy_api
+-- Name: nugget; Type: TABLE; Schema: opensociocracy_api; Owner: -
 --
 
 CREATE TABLE opensociocracy_api.nugget (
@@ -581,10 +553,8 @@ CREATE TABLE opensociocracy_api.nugget (
 );
 
 
-ALTER TABLE opensociocracy_api.nugget OWNER TO opensociocracy_api;
-
 --
--- Name: nugget_comment; Type: TABLE; Schema: opensociocracy_api; Owner: opensociocracy_api
+-- Name: nugget_comment; Type: TABLE; Schema: opensociocracy_api; Owner: -
 --
 
 CREATE TABLE opensociocracy_api.nugget_comment (
@@ -596,10 +566,8 @@ CREATE TABLE opensociocracy_api.nugget_comment (
 );
 
 
-ALTER TABLE opensociocracy_api.nugget_comment OWNER TO opensociocracy_api;
-
 --
--- Name: nugget_comment_id_seq; Type: SEQUENCE; Schema: opensociocracy_api; Owner: opensociocracy_api
+-- Name: nugget_comment_id_seq; Type: SEQUENCE; Schema: opensociocracy_api; Owner: -
 --
 
 CREATE SEQUENCE opensociocracy_api.nugget_comment_id_seq
@@ -610,17 +578,15 @@ CREATE SEQUENCE opensociocracy_api.nugget_comment_id_seq
     CACHE 1;
 
 
-ALTER TABLE opensociocracy_api.nugget_comment_id_seq OWNER TO opensociocracy_api;
-
 --
--- Name: nugget_comment_id_seq; Type: SEQUENCE OWNED BY; Schema: opensociocracy_api; Owner: opensociocracy_api
+-- Name: nugget_comment_id_seq; Type: SEQUENCE OWNED BY; Schema: opensociocracy_api; Owner: -
 --
 
 ALTER SEQUENCE opensociocracy_api.nugget_comment_id_seq OWNED BY opensociocracy_api.nugget_comment.id;
 
 
 --
--- Name: nugget_id_seq; Type: SEQUENCE; Schema: opensociocracy_api; Owner: opensociocracy_api
+-- Name: nugget_id_seq; Type: SEQUENCE; Schema: opensociocracy_api; Owner: -
 --
 
 CREATE SEQUENCE opensociocracy_api.nugget_id_seq
@@ -631,17 +597,15 @@ CREATE SEQUENCE opensociocracy_api.nugget_id_seq
     CACHE 1;
 
 
-ALTER TABLE opensociocracy_api.nugget_id_seq OWNER TO opensociocracy_api;
-
 --
--- Name: nugget_id_seq; Type: SEQUENCE OWNED BY; Schema: opensociocracy_api; Owner: opensociocracy_api
+-- Name: nugget_id_seq; Type: SEQUENCE OWNED BY; Schema: opensociocracy_api; Owner: -
 --
 
 ALTER SEQUENCE opensociocracy_api.nugget_id_seq OWNED BY opensociocracy_api.nugget.id;
 
 
 --
--- Name: nugget_member; Type: TABLE; Schema: opensociocracy_api; Owner: opensociocracy_api
+-- Name: nugget_member; Type: TABLE; Schema: opensociocracy_api; Owner: -
 --
 
 CREATE TABLE opensociocracy_api.nugget_member (
@@ -651,10 +615,8 @@ CREATE TABLE opensociocracy_api.nugget_member (
 );
 
 
-ALTER TABLE opensociocracy_api.nugget_member OWNER TO opensociocracy_api;
-
 --
--- Name: nugget_reaction; Type: TABLE; Schema: opensociocracy_api; Owner: opensociocracy_api
+-- Name: nugget_reaction; Type: TABLE; Schema: opensociocracy_api; Owner: -
 --
 
 CREATE TABLE opensociocracy_api.nugget_reaction (
@@ -664,10 +626,8 @@ CREATE TABLE opensociocracy_api.nugget_reaction (
 );
 
 
-ALTER TABLE opensociocracy_api.nugget_reaction OWNER TO opensociocracy_api;
-
 --
--- Name: nugget_type; Type: TABLE; Schema: opensociocracy_api; Owner: postgres
+-- Name: nugget_type; Type: TABLE; Schema: opensociocracy_api; Owner: -
 --
 
 CREATE TABLE opensociocracy_api.nugget_type (
@@ -677,12 +637,8 @@ CREATE TABLE opensociocracy_api.nugget_type (
 );
 
 
-ALTER TABLE opensociocracy_api.nugget_type OWNER TO opensociocracy_api;
-
-
-
 --
--- Name: response; Type: TABLE; Schema: opensociocracy_api; Owner: opensociocracy_api
+-- Name: response; Type: TABLE; Schema: opensociocracy_api; Owner: -
 --
 
 CREATE TABLE opensociocracy_api.response (
@@ -696,10 +652,8 @@ CREATE TABLE opensociocracy_api.response (
 );
 
 
-ALTER TABLE opensociocracy_api.response OWNER TO opensociocracy_api;
-
 --
--- Name: response_id_seq; Type: SEQUENCE; Schema: opensociocracy_api; Owner: opensociocracy_api
+-- Name: response_id_seq; Type: SEQUENCE; Schema: opensociocracy_api; Owner: -
 --
 
 CREATE SEQUENCE opensociocracy_api.response_id_seq
@@ -710,17 +664,15 @@ CREATE SEQUENCE opensociocracy_api.response_id_seq
     CACHE 1;
 
 
-ALTER TABLE opensociocracy_api.response_id_seq OWNER TO opensociocracy_api;
-
 --
--- Name: response_id_seq; Type: SEQUENCE OWNED BY; Schema: opensociocracy_api; Owner: opensociocracy_api
+-- Name: response_id_seq; Type: SEQUENCE OWNED BY; Schema: opensociocracy_api; Owner: -
 --
 
 ALTER SEQUENCE opensociocracy_api.response_id_seq OWNED BY opensociocracy_api.response.id;
 
 
 --
--- Name: service; Type: TABLE; Schema: opensociocracy_api; Owner: opensociocracy_api
+-- Name: service; Type: TABLE; Schema: opensociocracy_api; Owner: -
 --
 
 CREATE TABLE opensociocracy_api.service (
@@ -732,10 +684,8 @@ CREATE TABLE opensociocracy_api.service (
 );
 
 
-ALTER TABLE opensociocracy_api.service OWNER TO opensociocracy_api;
-
 --
--- Name: service_id_seq; Type: SEQUENCE; Schema: opensociocracy_api; Owner: opensociocracy_api
+-- Name: service_id_seq; Type: SEQUENCE; Schema: opensociocracy_api; Owner: -
 --
 
 CREATE SEQUENCE opensociocracy_api.service_id_seq
@@ -746,73 +696,280 @@ CREATE SEQUENCE opensociocracy_api.service_id_seq
     CACHE 1;
 
 
-ALTER TABLE opensociocracy_api.service_id_seq OWNER TO opensociocracy_api;
-
 --
--- Name: service_id_seq; Type: SEQUENCE OWNED BY; Schema: opensociocracy_api; Owner: opensociocracy_api
+-- Name: service_id_seq; Type: SEQUENCE OWNED BY; Schema: opensociocracy_api; Owner: -
 --
 
 ALTER SEQUENCE opensociocracy_api.service_id_seq OWNED BY opensociocracy_api.service.id;
 
 
 --
--- Name: account id; Type: DEFAULT; Schema: opensociocracy_api; Owner: opensociocracy_api
+-- Name: account id; Type: DEFAULT; Schema: opensociocracy_api; Owner: -
 --
 
 ALTER TABLE ONLY opensociocracy_api.account ALTER COLUMN id SET DEFAULT nextval('opensociocracy_api.account_id_seq'::regclass);
 
 
 --
--- Name: account_group id; Type: DEFAULT; Schema: opensociocracy_api; Owner: postgres
+-- Name: account_group id; Type: DEFAULT; Schema: opensociocracy_api; Owner: -
 --
 
 ALTER TABLE ONLY opensociocracy_api.account_group ALTER COLUMN id SET DEFAULT nextval('opensociocracy_api.account_group_id_seq'::regclass);
 
 
 --
--- Name: account_role id; Type: DEFAULT; Schema: opensociocracy_api; Owner: postgres
+-- Name: account_role id; Type: DEFAULT; Schema: opensociocracy_api; Owner: -
 --
 
 ALTER TABLE ONLY opensociocracy_api.account_role ALTER COLUMN id SET DEFAULT nextval('opensociocracy_api.account_role_id_seq'::regclass);
 
 
 --
--- Name: block_type id; Type: DEFAULT; Schema: opensociocracy_api; Owner: opensociocracy_api
+-- Name: block_type id; Type: DEFAULT; Schema: opensociocracy_api; Owner: -
 --
 
 ALTER TABLE ONLY opensociocracy_api.block_type ALTER COLUMN id SET DEFAULT nextval('opensociocracy_api.block_types_id_seq'::regclass);
 
 
 --
--- Name: member id; Type: DEFAULT; Schema: opensociocracy_api; Owner: opensociocracy_api
+-- Name: member id; Type: DEFAULT; Schema: opensociocracy_api; Owner: -
 --
 
 ALTER TABLE ONLY opensociocracy_api.member ALTER COLUMN id SET DEFAULT nextval('opensociocracy_api.member_id_seq'::regclass);
 
 
 --
--- Name: nugget id; Type: DEFAULT; Schema: opensociocracy_api; Owner: opensociocracy_api
+-- Name: nugget id; Type: DEFAULT; Schema: opensociocracy_api; Owner: -
 --
 
 ALTER TABLE ONLY opensociocracy_api.nugget ALTER COLUMN id SET DEFAULT nextval('opensociocracy_api.nugget_id_seq'::regclass);
 
 
 --
--- Name: nugget_comment id; Type: DEFAULT; Schema: opensociocracy_api; Owner: opensociocracy_api
+-- Name: nugget_comment id; Type: DEFAULT; Schema: opensociocracy_api; Owner: -
 --
 
 ALTER TABLE ONLY opensociocracy_api.nugget_comment ALTER COLUMN id SET DEFAULT nextval('opensociocracy_api.nugget_comment_id_seq'::regclass);
 
 
 --
--- Name: response id; Type: DEFAULT; Schema: opensociocracy_api; Owner: opensociocracy_api
+-- Name: response id; Type: DEFAULT; Schema: opensociocracy_api; Owner: -
 --
 
 ALTER TABLE ONLY opensociocracy_api.response ALTER COLUMN id SET DEFAULT nextval('opensociocracy_api.response_id_seq'::regclass);
 
 
 --
--- Name: service id; Type: DEFAULT; Schema: opensociocracy_api; Owner: opensociocracy_api
+-- Name: service id; Type: DEFAULT; Schema: opensociocracy_api; Owner: -
 --
 
 ALTER TABLE ONLY opensociocracy_api.service ALTER COLUMN id SET DEFAULT nextval('opensociocracy_api.service_id_seq'::regclass);
+
+
+--
+-- Name: SCHEMA opensociocracy_api; Type: ACL; Schema: -; Owner: -
+--
+
+GRANT USAGE ON SCHEMA opensociocracy_api TO opensociocracy_supertokens;
+
+
+--
+-- Name: TABLE account; Type: ACL; Schema: opensociocracy_api; Owner: -
+--
+
+GRANT ALL ON TABLE opensociocracy_api.account TO opensociocracy_supertokens;
+
+
+--
+-- Name: TABLE account_group; Type: ACL; Schema: opensociocracy_api; Owner: -
+--
+
+GRANT ALL ON TABLE opensociocracy_api.account_group TO opensociocracy_supertokens;
+
+
+--
+-- Name: SEQUENCE account_group_id_seq; Type: ACL; Schema: opensociocracy_api; Owner: -
+--
+
+GRANT ALL ON SEQUENCE opensociocracy_api.account_group_id_seq TO opensociocracy_supertokens;
+
+
+--
+-- Name: TABLE account_group_member; Type: ACL; Schema: opensociocracy_api; Owner: -
+--
+
+GRANT ALL ON TABLE opensociocracy_api.account_group_member TO opensociocracy_supertokens;
+
+
+--
+-- Name: SEQUENCE account_id_seq; Type: ACL; Schema: opensociocracy_api; Owner: -
+--
+
+GRANT ALL ON SEQUENCE opensociocracy_api.account_id_seq TO opensociocracy_supertokens;
+
+
+--
+-- Name: TABLE account_member; Type: ACL; Schema: opensociocracy_api; Owner: -
+--
+
+GRANT ALL ON TABLE opensociocracy_api.account_member TO opensociocracy_supertokens;
+
+
+--
+-- Name: TABLE account_nugget_type; Type: ACL; Schema: opensociocracy_api; Owner: -
+--
+
+GRANT ALL ON TABLE opensociocracy_api.account_nugget_type TO opensociocracy_supertokens;
+
+
+--
+-- Name: TABLE account_role; Type: ACL; Schema: opensociocracy_api; Owner: -
+--
+
+GRANT ALL ON TABLE opensociocracy_api.account_role TO opensociocracy_supertokens;
+
+
+--
+-- Name: SEQUENCE account_role_id_seq; Type: ACL; Schema: opensociocracy_api; Owner: -
+--
+
+GRANT ALL ON SEQUENCE opensociocracy_api.account_role_id_seq TO opensociocracy_supertokens;
+
+
+--
+-- Name: TABLE role; Type: ACL; Schema: opensociocracy_api; Owner: -
+--
+
+GRANT ALL ON TABLE opensociocracy_api.role TO opensociocracy_supertokens;
+
+
+--
+-- Name: TABLE all_perms; Type: ACL; Schema: opensociocracy_api; Owner: -
+--
+
+GRANT ALL ON TABLE opensociocracy_api.all_perms TO opensociocracy_supertokens;
+
+
+--
+-- Name: TABLE block_type; Type: ACL; Schema: opensociocracy_api; Owner: -
+--
+
+GRANT ALL ON TABLE opensociocracy_api.block_type TO opensociocracy_supertokens;
+
+
+--
+-- Name: SEQUENCE block_types_id_seq; Type: ACL; Schema: opensociocracy_api; Owner: -
+--
+
+GRANT ALL ON SEQUENCE opensociocracy_api.block_types_id_seq TO opensociocracy_supertokens;
+
+
+--
+-- Name: TABLE member; Type: ACL; Schema: opensociocracy_api; Owner: -
+--
+
+GRANT ALL ON TABLE opensociocracy_api.member TO opensociocracy_supertokens;
+
+
+--
+-- Name: TABLE member_accounts; Type: ACL; Schema: opensociocracy_api; Owner: -
+--
+
+GRANT ALL ON TABLE opensociocracy_api.member_accounts TO opensociocracy_supertokens;
+
+
+--
+-- Name: SEQUENCE member_id_seq; Type: ACL; Schema: opensociocracy_api; Owner: -
+--
+
+GRANT ALL ON SEQUENCE opensociocracy_api.member_id_seq TO opensociocracy_supertokens;
+
+
+--
+-- Name: TABLE member_permissions; Type: ACL; Schema: opensociocracy_api; Owner: -
+--
+
+GRANT ALL ON TABLE opensociocracy_api.member_permissions TO opensociocracy_supertokens;
+
+
+--
+-- Name: TABLE nugget; Type: ACL; Schema: opensociocracy_api; Owner: -
+--
+
+GRANT ALL ON TABLE opensociocracy_api.nugget TO opensociocracy_supertokens;
+
+
+--
+-- Name: TABLE nugget_comment; Type: ACL; Schema: opensociocracy_api; Owner: -
+--
+
+GRANT ALL ON TABLE opensociocracy_api.nugget_comment TO opensociocracy_supertokens;
+
+
+--
+-- Name: SEQUENCE nugget_comment_id_seq; Type: ACL; Schema: opensociocracy_api; Owner: -
+--
+
+GRANT ALL ON SEQUENCE opensociocracy_api.nugget_comment_id_seq TO opensociocracy_supertokens;
+
+
+--
+-- Name: SEQUENCE nugget_id_seq; Type: ACL; Schema: opensociocracy_api; Owner: -
+--
+
+GRANT ALL ON SEQUENCE opensociocracy_api.nugget_id_seq TO opensociocracy_supertokens;
+
+
+--
+-- Name: TABLE nugget_member; Type: ACL; Schema: opensociocracy_api; Owner: -
+--
+
+GRANT ALL ON TABLE opensociocracy_api.nugget_member TO opensociocracy_supertokens;
+
+
+--
+-- Name: TABLE nugget_reaction; Type: ACL; Schema: opensociocracy_api; Owner: -
+--
+
+GRANT ALL ON TABLE opensociocracy_api.nugget_reaction TO opensociocracy_supertokens;
+
+
+--
+-- Name: TABLE nugget_type; Type: ACL; Schema: opensociocracy_api; Owner: -
+--
+
+GRANT ALL ON TABLE opensociocracy_api.nugget_type TO opensociocracy_supertokens;
+
+
+--
+-- Name: TABLE response; Type: ACL; Schema: opensociocracy_api; Owner: -
+--
+
+GRANT ALL ON TABLE opensociocracy_api.response TO opensociocracy_supertokens;
+
+
+--
+-- Name: SEQUENCE response_id_seq; Type: ACL; Schema: opensociocracy_api; Owner: -
+--
+
+GRANT ALL ON SEQUENCE opensociocracy_api.response_id_seq TO opensociocracy_supertokens;
+
+
+--
+-- Name: TABLE service; Type: ACL; Schema: opensociocracy_api; Owner: -
+--
+
+GRANT ALL ON TABLE opensociocracy_api.service TO opensociocracy_supertokens;
+
+
+--
+-- Name: SEQUENCE service_id_seq; Type: ACL; Schema: opensociocracy_api; Owner: -
+--
+
+GRANT ALL ON SEQUENCE opensociocracy_api.service_id_seq TO opensociocracy_supertokens;
+
+
+--
+-- PostgreSQL database dump complete
+--
+
