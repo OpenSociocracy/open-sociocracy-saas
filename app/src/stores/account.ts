@@ -13,12 +13,6 @@ export const useAccountStore = defineStore('account', {
     lastSynced: useStorage('lastSynced', null),
   }),
   getters: {
-   currentAccount(state) {
-      if(state.currentAccount) {
-        return state.currentAccount
-      }
-      return 'personal';
-    },
     currentAccountName(state) {
       if(state.currentAccount) {
         return state.accounts[state.currentAccount].name;
