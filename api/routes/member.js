@@ -7,7 +7,6 @@ import st from "supertokens-node/framework/fastify/index.js";
 const { SessionRequest } = st;
 
 async function memberRoutes(server, options) {
-  server.register(memberServicePlugin);
 
   server.get(
     "/member/accounts",

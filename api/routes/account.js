@@ -31,8 +31,6 @@ async function accountRoutes(server, options) {
       
       let memberUid = request.session.getUserId();
 
-      //console.log('wtf')
-
       const accounts = await server.accountService.getMemberAccounts(memberUid);
 
       return {
@@ -41,7 +39,42 @@ async function accountRoutes(server, options) {
     }
   );
 
-  server.post(
+  server.get(
+    "/accounts/:accountUid/nuggets",
+    {
+      preHandler: verifySession(),
+      schema: {
+        description: "Return account nuggets",
+        tags: ["account"],
+        querystring: {
+          t: { type: 'string' }
+        },
+        response: {
+          200: {
+            description: "Success Response",
+            type: "object",
+            properties: {
+              nuggets: { type: "array" },
+            },
+          },
+        },
+      },
+    },
+    async (request, reply) => {
+      
+      let memberUid = request.session.getUserId();
+      let accountUid = request.params.accountUid;
+      let nuggetType = request.query.t
+
+      const nuggets = await server.accountService.getAccountNuggets(memberUid, accountUid, nuggetType);
+
+      return {
+        nuggets: nuggets,
+      };
+    }
+  );
+
+    server.post(
     "/accounts",
     {
       preHandler: verifySession(),

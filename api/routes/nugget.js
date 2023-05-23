@@ -1,14 +1,12 @@
 import fastifyPlugin from "fastify-plugin";
-import nuggetServicePlugin from "../services/nuggetService.js";
 
 import { verifySession } from "supertokens-node/recipe/session/framework/fastify/index.js";
 
 async function nuggetRoutes(server, options) {
-  server.register(nuggetServicePlugin);
 
   // CREATE a Nugget
   server.post(
-    "/nugget",
+    "/nuggets",
     {
       preHandler: verifySession(),
       schema: {

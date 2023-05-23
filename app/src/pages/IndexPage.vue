@@ -12,7 +12,8 @@
     </div>
   </q-page>
   <q-page class="row items-center justify-evenly" v-if="auth.isSignedIn">
-    <div class="text-h1 full-width text-center"></div>
+    <div class="text-h1 full-width text-center">{{ $t('homepage.signedIn.heading') }}</div>
+    <div class="text-h2 full-width  text-center">{{ $t('homepage.signedIn.tagline') }}</div>
 
   </q-page>
 </template>

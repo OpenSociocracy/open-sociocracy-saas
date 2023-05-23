@@ -2,8 +2,8 @@
 <div>
   Member Dashboard
 
- ID:  {{ auth.memberUid }}
- EMAIL:  {{ auth.memberEmail }}
+ MemberUid:  {{ auth.memberUid }}
+ MemberEmail:  {{ auth.memberEmail }}
 </div>
 
 </template>

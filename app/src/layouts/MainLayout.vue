@@ -8,9 +8,10 @@
           </q-avatar>-->
           <span><router-link :to="{ name: 'home'}" class="navbar-link">OpenSociocracy</router-link></span>
         </q-toolbar-title>
+
         <div>
           <!-- DISPLAY EMAIL IF LOGGED IN -->
-          <span class="gt-sm q-pr-md">{{ auth.memberEmail }}</span>
+          <span class="gt-xs q-pr-md">{{ auth.memberEmail }}</span>
 
           <!-- DISPLAY SIGN BUTTON -->
           <span>

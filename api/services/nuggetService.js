@@ -123,7 +123,7 @@ const NuggetService = (postgres) => {
 
 
 
-export default fp((server, options, next) => {
-  server.decorate("nuggetService", NuggetService(server.pg));
+export default fp((fastify, options, next) => {
+  fastify.decorate("nuggetService", NuggetService(fastify.pg));
   next();
 });
