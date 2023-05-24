@@ -154,8 +154,9 @@ export const useAuthStore = defineStore('auth', {
     },
     async signOut(url='/') {
       await Session.signOut();
-      this.reset();
+
       this.router.push(url);
+      this.$reset();
     },
     validateEmail(email) {
       return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/.test(email);

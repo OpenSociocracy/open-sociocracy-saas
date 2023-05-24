@@ -30,6 +30,9 @@
 <script setup language="ts">
 import { useDialogPluginComponent } from 'quasar';
 
+import { useAuthStore } from '../stores/auth';
+const auth = useAuthStore();
+
 const { dialogRef, onDialogOK } = useDialogPluginComponent();
 // dialogRef      - Vue ref to be applied to QDialog
 // onDialogHide   - Function to be used as handler for @hide on QDialog

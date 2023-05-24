@@ -2,7 +2,7 @@
   <q-btn-dropdown flat dense no-caps dropdown-icon="mdi-dots-grid">
     <q-list>
       <q-separator color="grey-7"></q-separator>
-     <!-- <q-item bordered dense>
+     <q-item bordered dense>
         <q-item-section>
           <q-item-label class="text-center menuheader">{{
             $t('nav.account').toUpperCase()
@@ -24,7 +24,7 @@
       </q-item>
 
       <q-separator color="grey-7"></q-separator>
-      -->
+
       <q-item bordered dense>
         <q-item-section>
           <q-item-label class="text-center menuheader">{{
@@ -188,7 +188,15 @@
 import { useI18n } from 'vue-i18n';
 
 import { useAuthStore } from '../stores/auth';
+import { useAccountStore } from '../stores/account';
+
 const auth = useAuthStore();
+
+const accounts = useAccountStore();
+
+if(!accounts.isSynced) {
+  console.log('Please sync me')
+}
 
 const { t } = useI18n();
 </script>

@@ -1,10 +1,6 @@
 import { defineStore } from 'pinia';
 import { useStorage } from '@vueuse/core';
 
-import { useAuthStore } from './auth';
-
-const auth = useAuthStore();
-
 export const useAccountStore = defineStore('account', {
   state: () => ({
     currentAccount: useStorage('currentAccount', null),
@@ -17,7 +13,7 @@ export const useAccountStore = defineStore('account', {
       if(state.currentAccount) {
         return state.accounts[state.currentAccount].name;
       } else {
-          return auth.memberEmail;
+          return '';
       }
     },
     isSynced(state) {
@@ -28,8 +24,9 @@ export const useAccountStore = defineStore('account', {
   actions: {
     reset() {
       this.currentAccount = null,
-      this.accountPerms = null,
-      this.accounts = {}
+      this.personalAccount = null,
+      this.accounts = {},
+      this.lastSynced = null
     },
     async refreshMemberAccounts() {
 

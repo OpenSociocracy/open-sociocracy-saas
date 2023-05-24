@@ -54,6 +54,8 @@
 
 <script setup lang="ts">
 import { useAuthStore } from '../stores/auth';
+import { useAccountStore } from '../stores/account';
+import { useThemeStore } from '../stores/theme';
 
 import AppsButton from '../components/AppsButton.vue';
 import NotificationsButton from '../components/NotificationsButton.vue';
@@ -64,6 +66,18 @@ import PasswordlessAuthDialog from '../components/PasswordlessDialog.vue';
 import WelcomeDialog from '../components/WelcomeDialog.vue';
 
 const auth = useAuthStore();
+
+auth.$subscribe((mutation, state) => {
+  // import { MutationType } from 'pinia'
+  mutation.type // 'direct' | 'patch object' | 'patch function'
+  // same as cartStore.$id
+  mutation.storeId // 'cart'
+  // only available with mutation.type === 'patch object'
+  mutation.payload // patch object passed to cartStore.$patch()
+
+  console.log('STATE', state)
+})
+
 </script>
 
 <style lang="scss">
