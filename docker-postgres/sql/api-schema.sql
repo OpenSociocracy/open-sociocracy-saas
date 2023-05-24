@@ -1152,6 +1152,20 @@ GRANT ALL ON TABLE opensociocracy_api.account TO opensociocracy_supertokens;
 
 
 --
+-- Name: TABLE org_circle; Type: ACL; Schema: opensociocracy_api; Owner: -
+--
+
+GRANT ALL ON TABLE opensociocracy_api.org_circle TO opensociocracy_supertokens;
+
+
+--
+-- Name: SEQUENCE account_circle_id_seq; Type: ACL; Schema: opensociocracy_api; Owner: -
+--
+
+GRANT ALL ON SEQUENCE opensociocracy_api.account_circle_id_seq TO opensociocracy_supertokens;
+
+
+--
 -- Name: SEQUENCE account_id_seq; Type: ACL; Schema: opensociocracy_api; Owner: -
 --
 
@@ -1170,6 +1184,34 @@ GRANT ALL ON TABLE opensociocracy_api.account_member TO opensociocracy_supertoke
 --
 
 GRANT ALL ON TABLE opensociocracy_api.comment TO opensociocracy_supertokens;
+
+
+--
+-- Name: TABLE logbook; Type: ACL; Schema: opensociocracy_api; Owner: -
+--
+
+GRANT ALL ON TABLE opensociocracy_api.logbook TO opensociocracy_supertokens;
+
+
+--
+-- Name: TABLE logbook_entry; Type: ACL; Schema: opensociocracy_api; Owner: -
+--
+
+GRANT ALL ON TABLE opensociocracy_api.logbook_entry TO opensociocracy_supertokens;
+
+
+--
+-- Name: SEQUENCE logbook_entry_id_seq; Type: ACL; Schema: opensociocracy_api; Owner: -
+--
+
+GRANT ALL ON SEQUENCE opensociocracy_api.logbook_entry_id_seq TO opensociocracy_supertokens;
+
+
+--
+-- Name: SEQUENCE logbook_id_seq; Type: ACL; Schema: opensociocracy_api; Owner: -
+--
+
+GRANT ALL ON SEQUENCE opensociocracy_api.logbook_id_seq TO opensociocracy_supertokens;
 
 
 --
@@ -1205,6 +1247,41 @@ GRANT ALL ON SEQUENCE opensociocracy_api.nugget_comment_id_seq TO opensociocracy
 --
 
 GRANT ALL ON SEQUENCE opensociocracy_api.nugget_id_seq TO opensociocracy_supertokens;
+
+
+--
+-- Name: TABLE org; Type: ACL; Schema: opensociocracy_api; Owner: -
+--
+
+GRANT ALL ON TABLE opensociocracy_api.org TO opensociocracy_supertokens;
+
+
+--
+-- Name: SEQUENCE org_account_id_seq; Type: ACL; Schema: opensociocracy_api; Owner: -
+--
+
+GRANT ALL ON SEQUENCE opensociocracy_api.org_account_id_seq TO opensociocracy_supertokens;
+
+
+--
+-- Name: TABLE org_circle_member; Type: ACL; Schema: opensociocracy_api; Owner: -
+--
+
+GRANT ALL ON TABLE opensociocracy_api.org_circle_member TO opensociocracy_supertokens;
+
+
+--
+-- Name: SEQUENCE org_circle_member_id_seq; Type: ACL; Schema: opensociocracy_api; Owner: -
+--
+
+GRANT ALL ON SEQUENCE opensociocracy_api.org_circle_member_id_seq TO opensociocracy_supertokens;
+
+
+--
+-- Name: SEQUENCE org_id_seq; Type: ACL; Schema: opensociocracy_api; Owner: -
+--
+
+GRANT ALL ON SEQUENCE opensociocracy_api.org_id_seq TO opensociocracy_supertokens;
 
 
 --
