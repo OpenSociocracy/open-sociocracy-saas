@@ -36,7 +36,8 @@ services:
       - "./api/services:/usr/src/app/services"
       - "./api/plugins:/usr/src/app/plugins"
       - "./api/routes:/usr/src/app/routes"
-      - "./api/index.ts:/usr/src/app/index.ts"
+      - "./api/app.js:/usr/src/app/app.js"
+      - "./api/server.js:/usr/src/app/server.js"
 
   redis:
     image: redis:7.0.7

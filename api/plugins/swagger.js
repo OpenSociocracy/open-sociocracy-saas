@@ -11,11 +11,11 @@ export default fp(async function(server, opts, done) {
     stripBasePath: false,
     swagger: {
         info: {
-          title: 'Ultri Open Platform API',
-          description: 'Open Platform API used for Izzup.com',
+          title: 'OpenSociocracy API',
+          description: 'OpenSociocracy Platform API',
           version: '0.1.0'
         },
-        host: 'service.ultri.com',
+        host: 'localhost',
         schemes: ['https','http'],
         consumes: ['application/json'],
         produces: ['application/json'],
@@ -23,7 +23,7 @@ export default fp(async function(server, opts, done) {
       },
 
     uiConfig: {
-      docExpansion: 'full',
+      docExpansion: 'none',
       deepLinking: false 
     },
     uiHooks: {

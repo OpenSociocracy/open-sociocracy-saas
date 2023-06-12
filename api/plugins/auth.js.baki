@@ -4,10 +4,11 @@ import fastifyPlugin from "fastify-plugin";
 
 import supertokens from "supertokens-node";
 import Session from "supertokens-node/recipe/session/index.js";
-import EmailPassword from "supertokens-node/recipe/emailpassword/index.js";
 import Passwordless from "supertokens-node/recipe/passwordless/index.js";
-import { SMTPService } from "supertokens-node/recipe/passwordless/emaildelivery/index.js";
+import EmailPassword from "supertokens-node/recipe/emailpassword/index.js";
 import ThirdPartyEmailPassword from "supertokens-node/recipe/thirdpartyemailpassword/index.js";
+import { SMTPService } from "supertokens-node/recipe/passwordless/emaildelivery/index.js";
+import Dashboard from "supertokens-node/recipe/dashboard/index.js";
 import {
   plugin,
   errorHandler,
@@ -77,7 +78,14 @@ async function auth(server, options) {
   // we register a CORS route to allow requests from the frontend
   server.register(cors, {
     origin: server.config.CORS_ORIGIN_URL,
-    allowedHeaders: ["Content-Type", ...supertokens.getAllCORSHeaders()],
+    allowedHeaders: [
+      "Content-Type",
+      "anti-csrf",
+      "rid",
+      "fdi-version",
+      "authorization",
+      "st-auth-mode",
+    ],
     methods: ["GET", "PUT", "POST", "DELETE"],
     credentials: true,
   });
@@ -89,5 +97,3 @@ async function auth(server, options) {
 }
 
 export default fastifyPlugin(auth);
-
-

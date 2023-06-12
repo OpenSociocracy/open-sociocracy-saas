@@ -36,7 +36,7 @@ router.beforeEach(async (to, from) => {
 
 SuperTokens.init({
   appInfo: {
-    apiDomain: 'https://localhost',
+    apiDomain: 'http://localhost:3000',
     apiBasePath: '/auth',
     appName: 'OpenSociocracy',
   },
