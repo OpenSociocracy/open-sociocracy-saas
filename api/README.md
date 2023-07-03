@@ -7,7 +7,7 @@ An example repository to show how SuperTokens are used with a Fastify web applic
 You can use this project as an authentication backend API for your application.
 It is based on:
 - Fastify web framework
-- SuperTokens as the authentication provider (SasS and their Node.js SDK and Fastify plugin)
+- SuperTokens as the authentication provider (SaaS and their Node.js SDK and Fastify plugin)
 
 ### Install dependencies
 
